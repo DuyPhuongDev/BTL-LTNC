@@ -34,8 +34,8 @@ public class AuthenticationFilter extends OncePerRequestFilter {
       throws ServletException, IOException {
     var token = parseJwtFromRequestHeader(request);
     if (jwtService.validateToken(token)) {
-      var email = jwtService.extractCredential(token);
-      var principal = securityUserService.loadUserByUsername(email);
+      var username = jwtService.extractCredential(token);
+      var principal = securityUserService.loadUserByUsername(username);
       var authentication =
           new UsernamePasswordAuthenticationToken(principal, null, principal.getAuthorities());
       authentication.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));

@@ -13,7 +13,7 @@ import org.springframework.core.env.PropertiesPropertySource;
 
 import java.util.Properties;
 
-@OpenAPIDefinition(info = @Info(title = "[CI-CD] LS-GI APIs"))
+@OpenAPIDefinition(info = @Info(title = "[CI-CD] LTNC APIs"))
 @Configuration
 @SecurityScheme(
         name = "Bearer Authentication",

@@ -1,6 +1,7 @@
 package com.ltnc.be.domain.user;
 
 import com.ltnc.be.domain.BaseEntity;
+import com.ltnc.be.domain.attendance.Attendance;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -37,6 +38,12 @@ public class User extends BaseEntity {
 
   @Column(name = "phone_number")
   private String phoneNumber;
+
+  @Column(name = "address")
+  private String address;
+
+  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+  private List<Attendance> attendances;
 
   public boolean isMember() {
     return UserRole.MEMBER.equals(this.role);
