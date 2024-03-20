@@ -1,6 +1,8 @@
 package com.ltnc.be.domain.attendance;
 
 import com.ltnc.be.domain.BaseEntity;
+import com.ltnc.be.domain.employee.Employee;
+import com.ltnc.be.domain.patient.Patient;
 import com.ltnc.be.domain.user.User;
 import jakarta.persistence.*;
 import lombok.*;
@@ -17,7 +19,13 @@ public class Attendance extends BaseEntity {
     private long beginTime;
     @Column(name="endTime")
     private long endTime;
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "user_id")
-    private User user;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "employee_id", referencedColumnName = "id")
+    private Employee employee;
+
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    private Patient patient;
+
 }

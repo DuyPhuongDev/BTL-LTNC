@@ -1,15 +1,15 @@
+
 package com.ltnc.be.domain.patient;
 
 import com.ltnc.be.domain.BaseEntity;
-import com.ltnc.be.domain.attendance.Attendance;
-import com.ltnc.be.domain.user.UserRole;
+import com.ltnc.be.domain.employee.Employee;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.Date;
 import java.util.List;
 
-@Table(name = "users")
+@Table(name = "patients")
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -17,29 +17,25 @@ import java.util.List;
 @Getter
 @Setter
 public class Patient extends BaseEntity {
-  @Enumerated(EnumType.STRING)
+    @Enumerated(EnumType.STRING)
+    @Column(name = "patientType")
+    private PatientType patientType;
 
-  @Column(name = "dob")
-  @Temporal(TemporalType.DATE)
-  private Date dob;
+    @Column(name = "dob")
+    @Temporal(TemporalType.DATE)
+    private Date dob;
 
-  @Column(name = "phoneNumber")
-  private String phoneNumber;
+    @Column(name = "phoneNumber")
+    private String phoneNumber;
 
-  @Column(name = "address")
-  private String address;
+    @Column(name = "address")
+    private String address;
 
-  @Column(name = "vssId")
-  private String vssId;
+    //@Id
+    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @Column(name = "vssId")
+    private String vssId;
 
-  @Column(name = "patientType")
-  private PatientType patientType;
-
-  @Column(name = "medicalRecord")
-
-
-  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-  private List<Attendance> authProviders;
-
-
+    @ManyToMany(mappedBy = "patientList")
+    private List<Employee> employeeList;
 }

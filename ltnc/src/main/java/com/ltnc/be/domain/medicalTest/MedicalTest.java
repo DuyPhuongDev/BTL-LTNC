@@ -1,9 +1,8 @@
 package com.ltnc.be.domain.medicalTest;
 
 import com.ltnc.be.domain.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Table;
+import com.ltnc.be.domain.medicalRecord.MedicalRecord;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Table(name = "medical_tests")
@@ -18,4 +17,8 @@ public class MedicalTest extends BaseEntity {
     private MedicalTestType medicalTestType;
     @Column(name = "medical_test_result")
     private String result;
+
+    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "record_id",referencedColumnName = "id")
+    private MedicalRecord medicalRecord;
 }
