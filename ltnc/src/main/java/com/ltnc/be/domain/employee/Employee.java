@@ -4,6 +4,7 @@ package com.ltnc.be.domain.employee;
 import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.admin.Admin;
 import com.ltnc.be.domain.medicalRecord.MedicalRecord;
+import com.ltnc.be.domain.medicine.Medicine;
 import com.ltnc.be.domain.patient.Patient;
 import com.ltnc.be.domain.user.User;
 import jakarta.persistence.*;
@@ -28,11 +29,6 @@ public class Employee extends User{
     @JoinColumn(name="manager_id", nullable=false)
     private Admin admin;
 
-    @ManyToMany(fetch = FetchType.LAZY)
-    @JoinTable(name = "receive_patient",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "patient_id") )
-    private List<Patient> patientList;
 
     @ManyToMany(fetch = FetchType.LAZY)
     @JoinTable(name = "handle_record",
@@ -40,4 +36,11 @@ public class Employee extends User{
             inverseJoinColumns = @JoinColumn(name = "record_id")
     )
     private List<MedicalRecord> medicalRecords;
+
+    @ManyToMany(fetch = FetchType.LAZY)
+    @JoinTable(name = "manage_medicine",
+            joinColumns = @JoinColumn(name = "employee_id"),
+            inverseJoinColumns = @JoinColumn(name = "medical_name")
+    )
+    private List<Medicine> medicineList;
 }

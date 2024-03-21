@@ -5,6 +5,7 @@ import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.employee.Employee;
 import jakarta.persistence.*;
 import lombok.*;
+import org.hibernate.annotations.NaturalId;
 
 import java.util.Date;
 import java.util.List;
@@ -31,11 +32,7 @@ public class Patient extends BaseEntity {
     @Column(name = "address")
     private String address;
 
-    //@Id
-    //@GeneratedValue(strategy = GenerationType.SEQUENCE)
+    @NaturalId
     @Column(name = "vssId")
     private String vssId;
-
-    @ManyToMany(mappedBy = "patientList")
-    private List<Employee> employeeList;
 }

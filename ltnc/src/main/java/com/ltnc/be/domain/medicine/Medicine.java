@@ -1,9 +1,11 @@
 package com.ltnc.be.domain.medicine;
 
+import com.ltnc.be.domain.employee.Employee;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.Instant;
+import java.util.List;
 
 @Table(name = "medicines")
 @Entity
@@ -33,6 +35,9 @@ public class Medicine {
 
     @Column(name = "price")
     private String price;
+
+    @ManyToMany(mappedBy = "medicineList")
+    private List<Employee> employees;
     @PrePersist
     protected void prePersist() {
         if (this.expiryDate == null) expiryDate = Instant.now().toEpochMilli();
