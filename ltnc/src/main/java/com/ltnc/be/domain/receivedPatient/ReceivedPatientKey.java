@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Setter
 @Getter
 @Builder
+@EqualsAndHashCode
 public class ReceivedPatientKey implements Serializable {
     @Column(name = "employee_id")
     private Long employeeId;

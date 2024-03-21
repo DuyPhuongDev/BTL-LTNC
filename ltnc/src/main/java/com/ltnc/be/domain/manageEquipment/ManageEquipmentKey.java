@@ -12,6 +12,7 @@ import java.io.Serializable;
 @Builder
 @Getter
 @Setter
+@EqualsAndHashCode
 public class ManageEquipmentKey implements Serializable {
     @Column(name = "employee_id")
     private Long employeeId;
