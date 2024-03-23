@@ -1,13 +1,14 @@
 package com.ltnc.be.domain.user;
 
 import com.ltnc.be.domain.BaseEntity;
-import com.ltnc.be.domain.attendance.Attendance;
+import com.ltnc.be.domain.employee.Employee;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
 import lombok.*;
 
 @Table(name = "users")
+@Inheritance(strategy = InheritanceType.JOINED)
 @Entity
 @AllArgsConstructor
 @NoArgsConstructor
@@ -40,9 +41,6 @@ public class User extends BaseEntity {
 
   @Column(name = "address")
   private String address;
-
-  @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
-  private List<Attendance> attendances;
 
   public boolean isMember() {
     return UserRole.MEMBER.equals(this.role);

@@ -6,6 +6,7 @@ import lombok.Getter;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.context.annotation.Primary;
 
 @Getter
 @Setter
@@ -18,7 +19,7 @@ public abstract class BaseEntity {
   @Column(name = "id")
   private Long id;
 
-  @Column(name = "created_at", nullable = false)
+  @Column(name = "created_at", nullable = false) // date epoch
   private Long createdAt;
 
   @Column(name = "updated_at", nullable = false)

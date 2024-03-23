@@ -1,7 +1,8 @@
 package com.ltnc.be.domain.medicalRecord;
 
 import com.ltnc.be.domain.BaseEntity;
-import com.ltnc.be.domain.medicalTest.MedicalTest;
+import com.ltnc.be.domain.employee.Employee;
+import com.ltnc.be.domain.patient.Patient;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -21,8 +22,11 @@ public class MedicalRecord extends BaseEntity {
     private long hospitalizedTime;
     @Column(name="leave_time")
     private long leaveTime;
-    @
 
-    @OneToMany(mappedBy = "medical_records",fetch = FetchType.LAZY)
-    private List<MedicalTest> medicalTestList;
+    @OneToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "patient_id", referencedColumnName = "id")
+    private Patient patient;
+
+    @ManyToMany(mappedBy = "medicalRecords")
+    private List<Employee> employees;
 }
