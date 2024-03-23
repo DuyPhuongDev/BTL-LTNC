@@ -1,4 +1,3 @@
 package com.ltnc.be.domain.prescription;
 
-public class Prescription {
-}
+public class Prescription {}

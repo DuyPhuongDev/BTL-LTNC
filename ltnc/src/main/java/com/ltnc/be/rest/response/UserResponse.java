@@ -1,9 +1,8 @@
 package com.ltnc.be.rest.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
-import java.util.Date;
-
 import com.ltnc.be.dto.UserDTO;
+import java.util.Date;
 import lombok.*;
 
 @Getter

@@ -32,7 +32,7 @@ public class SecurityUserService implements UserDetailsService {
   @SneakyThrows
   public UserDetails loadUserByUsername(String id) throws UsernameNotFoundException {
     var user =
-            this.userRepository.findById(Long.parseLong(id)).orElseThrow(EntityNotFoundException::new);
+        this.userRepository.findById(Long.parseLong(id)).orElseThrow(EntityNotFoundException::new);
     return SecurityUser.build(user);
   }
 }

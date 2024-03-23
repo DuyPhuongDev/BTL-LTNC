@@ -3,10 +3,9 @@ package com.ltnc.be.domain.user;
 import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.attendance.Attendance;
 import jakarta.persistence.*;
-import lombok.*;
-
 import java.util.Date;
 import java.util.List;
+import lombok.*;
 
 @Table(name = "users")
 @Entity

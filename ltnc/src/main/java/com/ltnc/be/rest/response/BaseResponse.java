@@ -1,8 +1,7 @@
 package com.ltnc.be.rest.response;
 
-import lombok.*;
-
 import java.util.Collections;
+import lombok.*;
 
 @AllArgsConstructor
 @NoArgsConstructor

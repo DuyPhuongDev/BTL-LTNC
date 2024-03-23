@@ -1,8 +1,7 @@
 package com.ltnc.be.dto;
 
-import java.util.Date;
-
 import com.ltnc.be.domain.user.User;
+import java.util.Date;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;

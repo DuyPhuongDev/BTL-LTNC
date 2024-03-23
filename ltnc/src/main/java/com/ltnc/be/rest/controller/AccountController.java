@@ -1,6 +1,5 @@
 package com.ltnc.be.rest.controller;
 
-
 import com.ltnc.be.port.facade.AccountFacade;
 import com.ltnc.be.rest.request.LoginRequest;
 import com.ltnc.be.rest.response.BaseResponse;
@@ -17,11 +16,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/v1/accounts")
 @AllArgsConstructor
 public class AccountController {
-    private final AccountFacade accountFacade;
-    @PostMapping("/login")
-    @Operation(tags = "Account APIs")
-    @ResponseStatus(HttpStatus.OK)
-    BaseResponse<LoginResponse> login(LoginRequest request){
-        return BaseResponse.of(accountFacade.login(request));
-    }
+  private final AccountFacade accountFacade;
+
+  @PostMapping("/login")
+  @Operation(tags = "Account APIs")
+  @ResponseStatus(HttpStatus.OK)
+  BaseResponse<LoginResponse> login(LoginRequest request) {
+    return BaseResponse.of(accountFacade.login(request));
+  }
 }

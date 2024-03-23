@@ -1,6 +1,5 @@
 package com.ltnc.be.domain.employee;
 
-
 import com.ltnc.be.domain.user.User;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -15,9 +14,9 @@ import lombok.*;
 @Getter
 @Setter
 public class Employee extends User {
-    @Column(name="duty", nullable = false)
-    private DutyType duty;
+  @Column(name = "duty", nullable = false)
+  private DutyType duty;
 
-    @Column(name="degree", nullable = false)
-    private DegreeType degree;
+  @Column(name = "degree", nullable = false)
+  private DegreeType degree;
 }

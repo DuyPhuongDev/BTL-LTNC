@@ -14,8 +14,9 @@ import lombok.*;
 @Getter
 @Setter
 public class MedicalTest extends BaseEntity {
-    @Column(name = "medical_test_type")
-    private MedicalTestType medicalTestType;
-    @Column(name = "medical_test_result")
-    private String result;
+  @Column(name = "medical_test_type")
+  private MedicalTestType medicalTestType;
+
+  @Column(name = "medical_test_result")
+  private String result;
 }

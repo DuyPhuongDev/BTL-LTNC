@@ -1,12 +1,11 @@
 package com.ltnc.be.rest.security;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.ltnc.be.domain.user.User;
+import com.ltnc.be.domain.user.UserRole;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
-import com.ltnc.be.domain.user.User;
-import com.ltnc.be.domain.user.UserRole;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

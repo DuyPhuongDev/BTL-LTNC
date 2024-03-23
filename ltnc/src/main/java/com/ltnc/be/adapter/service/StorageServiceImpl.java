@@ -5,18 +5,17 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.GeneratePresignedUrlRequest;
 import com.amazonaws.services.s3.model.ObjectMetadata;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+import com.ltnc.be.domain.common.StorageContentType;
+import com.ltnc.be.domain.common.StorageDomain;
+import com.ltnc.be.domain.common.StoragePresignedMethod;
+import com.ltnc.be.domain.exception.ExternalServiceException;
+import com.ltnc.be.port.service.StorageService;
 import java.io.ByteArrayInputStream;
 import java.net.URLConnection;
 import java.time.Instant;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.UUID;
-
-import com.ltnc.be.domain.common.StorageContentType;
-import com.ltnc.be.domain.common.StorageDomain;
-import com.ltnc.be.domain.common.StoragePresignedMethod;
-import com.ltnc.be.domain.exception.ExternalServiceException;
-import com.ltnc.be.port.service.StorageService;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.beans.factory.annotation.Value;
@@ -40,7 +39,7 @@ public class StorageServiceImpl implements StorageService {
 
   @Override
   public Pair<String, String> generatePresignedUrl(
-          StorageDomain storageDomain, StorageContentType storageContentType) {
+      StorageDomain storageDomain, StorageContentType storageContentType) {
     var key = buildPresignedUrlKey(storageDomain);
     var url = buildPresignedUrl(key, storageContentType);
     return Pair.of(key, url);

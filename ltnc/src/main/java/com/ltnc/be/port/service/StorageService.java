@@ -5,7 +5,8 @@ import com.ltnc.be.domain.common.StorageDomain;
 import org.springframework.data.util.Pair;
 
 public interface StorageService {
-  Pair<String, String> generatePresignedUrl(StorageDomain storageDomain, StorageContentType storageContentType);
+  Pair<String, String> generatePresignedUrl(
+      StorageDomain storageDomain, StorageContentType storageContentType);
 
   Pair<String, String> generatePublicPresignedUrl(StorageContentType storageContentType);
 

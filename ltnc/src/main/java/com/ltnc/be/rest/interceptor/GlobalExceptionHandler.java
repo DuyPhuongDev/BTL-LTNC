@@ -1,11 +1,12 @@
 package com.ltnc.be.rest.interceptor;
 
-
 import com.ltnc.be.domain.BaseException;
 import com.ltnc.be.rest.response.BaseResponse;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolationException;
+import java.util.Arrays;
+import java.util.stream.Collectors;
 import lombok.NonNull;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
@@ -22,9 +23,6 @@ import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
 import org.springframework.web.context.request.WebRequest;
 import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExceptionHandler;
-
-import java.util.Arrays;
-import java.util.stream.Collectors;
 
 @Order(Ordered.HIGHEST_PRECEDENCE)
 @RestControllerAdvice

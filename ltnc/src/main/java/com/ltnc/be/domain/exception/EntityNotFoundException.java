@@ -1,4 +1,5 @@
 package com.ltnc.be.domain.exception;
+
 import com.ltnc.be.domain.BaseException;
 import lombok.NonNull;
 

@@ -6,10 +6,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 @SpringBootApplication
 public class LtncApplication {
 
-    public static void main(String[] args) {
-        SpringApplication.run(LtncApplication.class, args);
-    }
-
+  public static void main(String[] args) {
+    SpringApplication.run(LtncApplication.class, args);
+  }
 }
-
-

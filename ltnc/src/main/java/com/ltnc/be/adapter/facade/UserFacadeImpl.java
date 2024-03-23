@@ -53,7 +53,7 @@ public class UserFacadeImpl implements UserFacade {
     if (userOpt.isPresent()) throw new EntityAlreadyExistedException();
 
     this.userRepository.save(
-            User.createMember(request.getUsername(), passwordEncoder.encode(request.getPassword())));
+        User.createMember(request.getUsername(), passwordEncoder.encode(request.getPassword())));
   }
 
   @SneakyThrows
