@@ -16,7 +16,7 @@ import java.time.Instant;
 @MappedSuperclass
 public abstract class BaseEntity {
   @Id
-  @GeneratedValue(strategy = GenerationType.SEQUENCE)
+  @GeneratedValue(strategy = GenerationType.IDENTITY)
   @Column(name = "id")
   private Long id;
 
