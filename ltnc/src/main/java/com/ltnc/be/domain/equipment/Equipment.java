@@ -1,23 +1,41 @@
 package com.ltnc.be.domain.equipment;
 
 import com.ltnc.be.domain.BaseEntity;
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
-import lombok.*;
+import com.ltnc.be.domain.employee.Employee;
+import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
-@Table(name = "equipments")
+import java.util.Date;
+import java.util.List;
+
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@Builder
+@Table(name = "equipment")
+@Data
 @NoArgsConstructor
 @AllArgsConstructor
-@Setter
-@Getter
 public class Equipment extends BaseEntity {
+    @Column(name = "input_date")
+    @Temporal(TemporalType.DATE)
+    private Date inputDate;
+
+    @Column(name = "supplier")
+    private  String supplier;
+
     @Column(name = "name")
     private String name;
 
-    @Column(name = "available")
-    private boolean available;
+    private String status;
+    private int quantities;
+
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "manage_equipment",
+            joinColumns = @JoinColumn(name = "equipment_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
+    private List<Employee> employees;
 }

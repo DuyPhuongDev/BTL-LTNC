@@ -1,6 +1,6 @@
 package com.ltnc.be.domain.medicine;
 
-public enum MedicalUseType {
+public enum MedicineUseType {
     ANALGESICS,
     ANTIBIOTICS,
     ANTIPYRETICS,

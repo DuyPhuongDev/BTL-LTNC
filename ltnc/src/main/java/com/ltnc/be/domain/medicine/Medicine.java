@@ -1,22 +1,26 @@
 package com.ltnc.be.domain.medicine;
 
+import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.employee.Employee;
+import com.ltnc.be.domain.prescription.Prescription;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import org.springframework.jdbc.core.SqlReturnType;
 
-import java.time.Instant;
+import java.util.Date;
 import java.util.List;
 
-@Table(name = "medicines")
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
-@Builder
-@Getter
-@Setter
-public class Medicine {
-    @Id
-    @Column(name = "name", nullable = false, unique = true)
+@AllArgsConstructor
+@Table(name = "medicine")
+public class Medicine extends BaseEntity {
+    @Column(name = "name", unique = true, nullable = false)
     private String name;
 
     @Column(name = "quantity", nullable = false)
@@ -27,29 +31,36 @@ public class Medicine {
     private MedicineType medicineType;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "medical_use_type")
-    private MedicalUseType medicalUseType;
+    @Column(name = "medicine_use_type")
+    private MedicineUseType medicalUseType;
 
     @Column(name = "expiry_date", nullable = false)
-    private Long expiryDate;
+    @Temporal(TemporalType.DATE)
+    private Date expiryDate;
 
     @Column(name = "price")
     private String price;
 
-    @ManyToMany(mappedBy = "medicineList")
+    @Column(name = "supplier")
+    private String supplier;
+
+    @Column(name = "input_date")
+    @Temporal(TemporalType.DATE)
+    private Date inputDate;
+
+    @Column(name = "ingredient")
+    private String ingredient;
+
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinTable(
+            name = "manage_medicine",
+            joinColumns = @JoinColumn(name = "medicine_id"),
+            inverseJoinColumns = @JoinColumn(name = "employee_id")
+    )
     private List<Employee> employees;
-    @PrePersist
-    protected void prePersist() {
-        if (this.expiryDate == null) expiryDate = Instant.now().toEpochMilli();
-    }
 
-    @PreUpdate
-    protected void preUpdate() {
-        this.expiryDate = Instant.now().toEpochMilli();
-    }
 
-    @PreRemove
-    protected void preRemove() {
-        this.expiryDate = Instant.now().toEpochMilli();
-    }
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "prescription_id")
+    private Prescription prescription;
 }

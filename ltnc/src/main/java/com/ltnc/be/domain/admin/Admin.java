@@ -1,15 +1,25 @@
 package com.ltnc.be.domain.admin;
 
-import com.ltnc.be.domain.employee.Employee;
+import com.ltnc.be.domain.leaveApplication.LeaveApplication;
 import com.ltnc.be.domain.user.User;
+import com.ltnc.be.domain.user.UserRole;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
 
+import java.util.ArrayList;
 import java.util.List;
 
-@Table(name = "admins")
+@EqualsAndHashCode(callSuper = true)
 @Entity
-public class Admin extends User{
-    @OneToMany(mappedBy = "id")
-    private List<Employee> employees;
+@Table(name = "admin")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+public class Admin extends User {
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
+    @JoinColumn(name = "admin_id")
+    private List<LeaveApplication> leaveApplications;
 }
