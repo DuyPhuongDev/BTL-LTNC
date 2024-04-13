@@ -1,24 +1,29 @@
 package com.ltnc.be.domain.medicalTest;
 
+
 import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.medicalRecord.MedicalRecord;
+import com.ltnc.be.domain.patient.Patient;
 import jakarta.persistence.*;
 import lombok.*;
 
-@Table(name = "medical_tests")
+@EqualsAndHashCode(callSuper = true)
 @Entity
-@AllArgsConstructor
+@Data
 @NoArgsConstructor
-@Builder
-@Getter
-@Setter
+@AllArgsConstructor
+@Table(name = "medical_test")
 public class MedicalTest extends BaseEntity {
-    @Column(name = "medical_test_type")
-    private MedicalTestType medicalTestType;
-    @Column(name = "medical_test_result")
+    @Enumerated(EnumType.STRING)
+    private TestType testType;
+
     private String result;
 
-    @ManyToOne(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JoinColumn(name = "record_id",referencedColumnName = "id")
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
+
+    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @JoinColumn(name = "record_id")
     private MedicalRecord medicalRecord;
 }

@@ -1,11 +1,15 @@
 package com.ltnc.be.port.repository;
 
 import com.ltnc.be.domain.user.User;
-import java.util.Optional;
+import org.jetbrains.annotations.NotNull;
 import org.springframework.data.jpa.repository.JpaRepository;
 
-public interface UserRepository extends JpaRepository<User, Long> {
-  Optional<User> findByUsername(String username);
+import java.util.Optional;
 
-  boolean existsByUsername(String username);
+public interface UserRepository extends JpaRepository<User, Long> {
+    Optional<User> findByUsername(String username);
+
+    boolean existsByUsername(String username);
+
+    @NotNull Optional<User> findById(@NotNull Long id);
 }

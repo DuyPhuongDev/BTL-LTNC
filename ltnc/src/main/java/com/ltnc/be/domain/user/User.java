@@ -1,7 +1,6 @@
 package com.ltnc.be.domain.user;
 
 import com.ltnc.be.domain.BaseEntity;
-import com.ltnc.be.domain.employee.Employee;
 import jakarta.persistence.*;
 import java.util.Date;
 import java.util.List;
