@@ -3,18 +3,13 @@ package com.ltnc.be.domain.employee;
 import com.ltnc.be.domain.equipment.Equipment;
 import com.ltnc.be.domain.leaveApplication.LeaveApplication;
 import com.ltnc.be.domain.medicalRecord.MedicalRecord;
-import com.ltnc.be.domain.medicine.Medicine;
 import com.ltnc.be.domain.medicineManagement.MedicineManagement;
 import com.ltnc.be.domain.patientEmployee.PatientEmployee;
-import com.ltnc.be.domain.room.Room;
 import com.ltnc.be.domain.prescription.Prescription;
 import com.ltnc.be.domain.roomEmployee.RoomEmployee;
 import com.ltnc.be.domain.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
@@ -71,4 +66,13 @@ public class Employee extends User {
 
     @OneToMany(mappedBy = "prescriber", fetch = FetchType.LAZY)
     private List<Prescription> prescriptions;
+
+    // Manager relationship
+    @ManyToOne
+    @JoinColumn(name = "manager_id")
+    private Employee manager;
+
+    // Employees under this manager
+    @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
+    private List<Employee> employees;
 }

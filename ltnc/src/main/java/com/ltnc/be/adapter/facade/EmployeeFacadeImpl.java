@@ -1,11 +1,13 @@
 package com.ltnc.be.adapter.facade;
 
 import com.ltnc.be.domain.employee.DutyType;
+import com.ltnc.be.domain.employee.Employee;
 import com.ltnc.be.dto.EmployeeDTO;
 import com.ltnc.be.port.facade.EmployeeFacade;
 import com.ltnc.be.port.repository.EmployeeRepository;
 import com.ltnc.be.rest.response.EmployeeResponse;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -13,6 +15,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -31,7 +34,7 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
             return new ArrayList<EmployeeResponse>();
         }
     }
-    public List<EmployeeResponse> getEmployeesBySearchCriteria(String name, DutyType dutyType, Integer pageNo, Integer pageSize, String sortBy){
+    public List<EmployeeResponse> searchEmployees(String name, DutyType dutyType, Integer pageNo, Integer pageSize, String sortBy){
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         var employees = employeeRepository.findEmployeesBySearchCriteria(name, dutyType, paging);
         if(employees.hasContent()){
@@ -42,4 +45,41 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
             return new ArrayList<EmployeeResponse>();
         }
     }
+
+    @Override
+    public List<EmployeeResponse> getAllEmployeesManagedByEmployee(Long managerId, Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+        Page<Employee> managedEmployees = employeeRepository.findByManagerId(managerId, paging);
+
+        if (managedEmployees.hasContent()) {
+            return managedEmployees.getContent().stream()
+                    .map(EmployeeDTO::fromDomain) // Assuming you have a method to convert from domain to DTO
+                    .map(EmployeeResponse::toEmployeeResponse) // Convert DTOs to responses
+                    .collect(Collectors.toList());
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+    @Override
+    public List<EmployeeResponse> searchAllEmployeesManagedByEmployee(Long managerId, String name, DutyType dutyType, Integer pageNo, Integer pageSize, String sortBy) {
+        Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
+
+        Page<Employee> employees = employeeRepository.findAllByManagerAndCriteria(managerId, name, dutyType, paging);
+
+        if (employees.hasContent()) {
+            return employees.getContent().stream()
+                    .map(EmployeeDTO::fromDomain) // Convert Employee to EmployeeDTO
+                    .map(EmployeeResponse::toEmployeeResponse) // Convert EmployeeDTO to EmployeeResponse
+                    .collect(Collectors.toList());
+        } else {
+            return new ArrayList<>();
+        }
+    }
+
+
+
+
+
 }
