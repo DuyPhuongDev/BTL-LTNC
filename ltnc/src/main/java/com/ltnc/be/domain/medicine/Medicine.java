@@ -35,9 +35,6 @@ public class Medicine extends BaseEntity {
     @Column(name = "price")
     private String price;
 
-    @Column(name = "supplier")
-    private String supplier;
-
     @Column(name = "ingredient")
     private String ingredient;
 

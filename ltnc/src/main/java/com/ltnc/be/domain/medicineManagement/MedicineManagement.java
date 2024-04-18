@@ -21,6 +21,9 @@ public class MedicineManagement extends BaseEntity {
     @Column(name = "input_quantity")
     private Long input_quantity;
 
+    @Column(name = "supplier")
+    private String supplier;
+
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
     private Employee employee;
