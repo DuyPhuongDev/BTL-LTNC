@@ -10,10 +10,8 @@ import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "leave_application")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 public class LeaveApplication extends BaseEntity {
@@ -31,7 +29,7 @@ public class LeaveApplication extends BaseEntity {
     @Column(name = "status")
     private String status;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
     private Employee employee;
 }

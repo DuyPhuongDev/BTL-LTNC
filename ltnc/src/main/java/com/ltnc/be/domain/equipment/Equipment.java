@@ -3,20 +3,17 @@ package com.ltnc.be.domain.equipment;
 import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.employee.Employee;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "equipment")
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 public class Equipment extends BaseEntity {
     @Column(name = "input_date")
     @Temporal(TemporalType.DATE)

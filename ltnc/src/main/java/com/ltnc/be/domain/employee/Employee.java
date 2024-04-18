@@ -4,8 +4,11 @@ import com.ltnc.be.domain.equipment.Equipment;
 import com.ltnc.be.domain.leaveApplication.LeaveApplication;
 import com.ltnc.be.domain.medicalRecord.MedicalRecord;
 import com.ltnc.be.domain.medicine.Medicine;
-import com.ltnc.be.domain.patientRoom.PatientRoom;
+import com.ltnc.be.domain.medicineManagement.MedicineManagement;
+import com.ltnc.be.domain.patientEmployee.PatientEmployee;
+import com.ltnc.be.domain.room.Room;
 import com.ltnc.be.domain.prescription.Prescription;
+import com.ltnc.be.domain.roomEmployee.RoomEmployee;
 import com.ltnc.be.domain.user.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -31,12 +34,14 @@ public class Employee extends User {
     @Column(name = "duty_type")
     private DutyType dutyType;
 
-    @OneToOne(mappedBy = "employee",cascade = CascadeType.ALL)
-    private LeaveApplication leaveApplication;
+    @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
+    private List<LeaveApplication> leaveApplicationList;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "patientRoom_id")
-    private PatientRoom patientRoom;
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<RoomEmployee> roomEmployee;
+
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    private List<PatientEmployee> patientEmployees;
 
     @Column(name = "time_start")
     @Temporal(TemporalType.TIMESTAMP)
@@ -53,13 +58,8 @@ public class Employee extends User {
     )
     private List<Equipment> equipments;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinTable(
-            name = "manage_medicine",
-            joinColumns = @JoinColumn(name = "employee_id"),
-            inverseJoinColumns = @JoinColumn(name = "medicine_id")
-    )
-    private List<Medicine> medicines;
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "employee")
+    private List<MedicineManagement> medicineManagementList;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(
@@ -69,6 +69,6 @@ public class Employee extends User {
     )
     private List<MedicalRecord> medicalRecords;
 
-    @OneToMany(mappedBy = "employee",cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "prescriber", fetch = FetchType.LAZY)
     private List<Prescription> prescriptions;
 }

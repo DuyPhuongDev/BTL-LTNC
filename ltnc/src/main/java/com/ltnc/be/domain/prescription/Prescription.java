@@ -5,37 +5,33 @@ import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.employee.Employee;
 import com.ltnc.be.domain.medicalRecord.MedicalRecord;
 import com.ltnc.be.domain.medicine.Medicine;
+import com.ltnc.be.domain.patient.Patient;
+import com.ltnc.be.domain.prescriptionMedicine.PrescriptionMedicine;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.ArrayList;
 import java.util.List;
-
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @Table(name = "prescription")
 public class Prescription extends BaseEntity {
-    @Column(name = "use_manual")
-    private String useManual;
+    @Column(name = "user_manual")
+    private String userManual;
 
-    @Column(name = "quantities")
-    private int quantities;
-
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "record_id")
-    private MedicalRecord medicalRecord;
-
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
-    private Employee employee;
+    private Employee prescriber;
 
-    @OneToMany(mappedBy = "prescription", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    private List<Medicine> medicines;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "patient_id")
+    private Patient patient;
 
+    @OneToMany(fetch = FetchType.EAGER, mappedBy = "prescription")
+    private List<PrescriptionMedicine> prescriptionMedicines;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    private MedicalRecord medicalRecord;
 }

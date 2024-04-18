@@ -4,21 +4,19 @@ package com.ltnc.be.domain.patient;
 import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.medicalRecord.MedicalRecord;
 import com.ltnc.be.domain.medicalTest.MedicalTest;
+import com.ltnc.be.domain.patientEmployee.PatientEmployee;
 import com.ltnc.be.domain.patientRoom.PatientRoom;
+import com.ltnc.be.domain.room.Room;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @Table(name = "patient")
 public class Patient extends BaseEntity {
     @Column(name = "BHYT", unique = true, nullable = false)
@@ -36,7 +34,7 @@ public class Patient extends BaseEntity {
 
     @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinColumn(name = "room_id")
-    private PatientRoom patientRoom;
+    private Room patientRoom;
 
     @Column(name = "time_start")
     @Temporal(TemporalType.TIMESTAMP)
@@ -46,9 +44,15 @@ public class Patient extends BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date  timeEnd;
 
-    @OneToMany(mappedBy = "patient", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH })
+    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     private List<MedicalTest> medicalTests;
 
-    @OneToOne(mappedBy = "patient", cascade = CascadeType.ALL)
+    @OneToOne(mappedBy = "patient", fetch = FetchType.EAGER)
     private MedicalRecord medicalRecord;
+
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    private List<PatientEmployee> patientEmployees;
+
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    private List<PatientRoom> patientRooms;
 }

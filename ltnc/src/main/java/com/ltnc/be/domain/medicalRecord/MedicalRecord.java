@@ -45,6 +45,6 @@ public class MedicalRecord extends BaseEntity {
     @OneToMany(mappedBy = "medicalRecord", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     private List<MedicalTest> medicalTests;
 
-    @OneToMany(mappedBy = "medicalRecord", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "medicalRecord", fetch = FetchType.EAGER)
     private List<Prescription> prescriptions;
 }

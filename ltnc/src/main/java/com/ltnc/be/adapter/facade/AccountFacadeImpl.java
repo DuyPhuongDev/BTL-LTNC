@@ -9,6 +9,7 @@ import com.ltnc.be.port.facade.AccountFacade;
 import com.ltnc.be.port.repository.UserRepository;
 import com.ltnc.be.port.service.JwtService;
 import com.ltnc.be.rest.request.LoginRequest;
+import com.ltnc.be.rest.request.UpsertEmployeeRequest;
 import com.ltnc.be.rest.request.UpsertUserRequest;
 import com.ltnc.be.rest.response.LoginResponse;
 import lombok.RequiredArgsConstructor;
@@ -41,7 +42,7 @@ public class AccountFacadeImpl implements AccountFacade {
 
   @Override
   @SneakyThrows
-  public void signUp(UpsertUserRequest request) {
+  public void createEmployee(UpsertEmployeeRequest request) {
     var existedUser = this.userRepository.findByUsername(request.getUsername());
     if (existedUser.isPresent())
       throw new EntityAlreadyExistedException("Username is already existed in the system");
