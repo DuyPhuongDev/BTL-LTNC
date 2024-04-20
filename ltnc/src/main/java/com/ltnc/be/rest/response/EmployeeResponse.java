@@ -2,10 +2,7 @@ package com.ltnc.be.rest.response;
 
 import com.ltnc.be.domain.employee.DegreeType;
 import com.ltnc.be.domain.employee.DutyType;
-import com.ltnc.be.dto.EquipmentDTO;
-import com.ltnc.be.dto.MedicalRecordDTO;
-import com.ltnc.be.dto.MedicineManagementDTO;
-import com.ltnc.be.dto.PrescriptionDTO;
+import com.ltnc.be.dto.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -28,6 +25,7 @@ public class EmployeeResponse {
     private String sex;
     private Date timeStart;
     private Date timeEnd;
+    private List<TaskDTO> tasks;
     private List<EquipmentDTO> equipments;
     private List<PrescriptionDTO> prescriptions;
     private List<MedicalRecordDTO> medicalRecords;
@@ -44,6 +42,7 @@ public class EmployeeResponse {
                 .timeStart(employeeDTO.getTimeStart())
                 .sex(employeeDTO.getSex())
                 .timeEnd(employeeDTO.getTimeEnd())
+                .tasks(employeeDTO.getTasks())
                 .equipments(employeeDTO.getEquipments())
                 .prescriptions(employeeDTO.getPrescriptions())
                 .medicalRecords(employeeDTO.getMedicalRecords())

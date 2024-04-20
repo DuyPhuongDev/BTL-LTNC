@@ -28,7 +28,7 @@ public class Equipment extends BaseEntity {
     private String status;
     private int quantities;
 
-    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
     @JoinTable(
             name = "manage_equipment",
             joinColumns = @JoinColumn(name = "equipment_id"),
