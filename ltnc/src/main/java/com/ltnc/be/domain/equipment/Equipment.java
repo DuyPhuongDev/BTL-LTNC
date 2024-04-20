@@ -14,6 +14,7 @@ import java.util.List;
 @AllArgsConstructor
 @Getter
 @Setter
+@Builder
 public class Equipment extends BaseEntity {
     @Column(name = "input_date")
     @Temporal(TemporalType.DATE)
@@ -25,7 +26,8 @@ public class Equipment extends BaseEntity {
     @Column(name = "name")
     private String name;
 
-    private String status;
+    @Enumerated(EnumType.STRING)
+    private Status status;
     private int quantities;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH}, fetch = FetchType.EAGER)
