@@ -63,10 +63,18 @@ public class TaskFacadeImpl implements TaskFacade {
         Optional<Employee> optionalEmployee = employeeRepository.findEmployeeById(request.getEmployeeId());
         if(optionalTask.isPresent() && optionalEmployee.isPresent()){
             Task task = optionalTask.get();
-            task.setStartTime(request.getStartTime());
-            task.setEndTime(request.getEndTime());
-            task.setDescription(request.getDescription());
-            task.setStatus(request.getStatus());
+            if (request.getStartTime() != null) {
+                task.setStartTime(request.getStartTime());
+            }
+            if (request.getEndTime() != null) {
+                task.setEndTime(request.getEndTime());
+            }
+            if (request.getDescription() != null) {
+                task.setDescription(request.getDescription());
+            }
+            if (request.getStatus() != null) {
+                task.setStatus(request.getStatus());
+            }
             task.setEmployee(optionalEmployee.get());
             taskRepository.save(task);
         }else throw new EntityNotFoundException();
