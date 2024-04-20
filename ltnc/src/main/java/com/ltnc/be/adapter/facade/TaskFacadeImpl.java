@@ -68,6 +68,7 @@ public class TaskFacadeImpl implements TaskFacade {
             task.setDescription(request.getDescription());
             task.setStatus(request.getStatus());
             task.setEmployee(optionalEmployee.get());
+            taskRepository.save(task);
         }else throw new EntityNotFoundException();
     }
 
