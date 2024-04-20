@@ -4,17 +4,15 @@ import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.employee.Employee;
 import com.ltnc.be.domain.user.User;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "task")
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class Task extends BaseEntity {

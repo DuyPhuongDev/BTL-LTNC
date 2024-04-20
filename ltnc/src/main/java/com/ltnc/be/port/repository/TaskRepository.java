@@ -11,8 +11,9 @@ import java.util.Optional;
 public interface TaskRepository extends JpaRepository<Task,Long> {
 
     @Query("SELECT t FROM Task t " +
-            "JOIN t.employee e " +
-            "WHERE (:employeeId IS NULL OR e.id = :employeeId) ")
-    Optional<List<Task>> findAllByEmployeeIdAndCriteria(@Param("employeeId") Long employeeId);
+            "WHERE t.employee.id = :employeeId " +
+            "AND (:month IS NULL OR MONTH(t.startTime) = :month)")
+    Optional<List<Task>> getAllTasksByEmployeeIdAndCriteria(@Param("employeeId") Long employeeId, @Param("month") int month);
 
+    Optional<Task> findTaskById(Long taskId);
 }

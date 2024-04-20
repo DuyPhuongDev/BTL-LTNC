@@ -40,7 +40,7 @@ public class EmployeeController {
     @GetMapping("/{managerId}/")
     @Operation(tags = "Employee APIs")
     @ResponseStatus(HttpStatus.OK)
-    @IsAuthenticated
+    //@IsAuthenticated
     public BaseResponse<List<EmployeeResponse>> getAllEmployeesManagedByEmployee(@PathVariable Long managerId,
                                                              @RequestParam(defaultValue = "0") Integer pageNo,
                                                              @RequestParam(defaultValue = "10") Integer pageSize,
