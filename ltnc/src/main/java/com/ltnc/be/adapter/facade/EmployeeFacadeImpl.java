@@ -1,5 +1,6 @@
 package com.ltnc.be.adapter.facade;
 
+import com.ltnc.be.domain.employee.Department;
 import com.ltnc.be.domain.employee.DutyType;
 import com.ltnc.be.domain.employee.Employee;
 import com.ltnc.be.domain.exception.EntityNotFoundException;
@@ -39,9 +40,9 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
             return new ArrayList<EmployeeResponse>();
         }
     }
-    public List<EmployeeResponse> searchEmployees(String name, DutyType dutyType, Integer pageNo, Integer pageSize, String sortBy){
+    public List<EmployeeResponse> searchEmployees(String name, DutyType dutyType, Department department, Integer pageNo, Integer pageSize, String sortBy){
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
-        var employees = employeeRepository.findEmployeesBySearchCriteria(name, dutyType, paging);
+        var employees = employeeRepository.findEmployeesBySearchCriteria(name, dutyType,department, paging);
         if(employees.hasContent()){
             var employeesDto = employees.getContent().stream().map(EmployeeDTO::fromDomain).toList();
             return employeesDto.stream().map(EmployeeResponse::toEmployeeResponse).toList();
@@ -68,10 +69,10 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
     }
 
     @Override
-    public List<EmployeeResponse> searchAllEmployeesManagedByEmployee(Long managerId, String name, DutyType dutyType, Integer pageNo, Integer pageSize, String sortBy) {
+    public List<EmployeeResponse> searchAllEmployeesManagedByEmployee(Long managerId, String name, DutyType dutyType, Department department, Integer pageNo, Integer pageSize, String sortBy) {
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
 
-        Page<Employee> employees = employeeRepository.findAllByManagerAndCriteria(managerId, name, dutyType, paging);
+        Page<Employee> employees = employeeRepository.findAllByManagerAndCriteria(managerId, name, dutyType, department, paging);
 
         if (employees.hasContent()) {
             return employees.getContent().stream()
@@ -105,6 +106,7 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
             employee.setPhoneNumber(request.getPhone());
             employee.setDegreeType(request.getDegreeType());
             employee.setDutyType(request.getDutyType());
+            employee.setDepartment(request.getDepartment());
             employeeRepository.save(employee);
         }else{
             throw new EntityNotFoundException();

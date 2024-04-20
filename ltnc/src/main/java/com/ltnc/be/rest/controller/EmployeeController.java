@@ -3,6 +3,7 @@ package com.ltnc.be.rest.controller;
 import com.ltnc.be.annotation.IsAuthenticated;
 import com.ltnc.be.annotation.IsAuthorizedAsAdmin;
 import com.ltnc.be.annotation.IsAuthorizedAsMember;
+import com.ltnc.be.domain.employee.Department;
 import com.ltnc.be.domain.employee.DutyType;
 import com.ltnc.be.domain.employee.Employee;
 import com.ltnc.be.port.facade.EmployeeFacade;
@@ -30,9 +31,10 @@ public class EmployeeController {
                                                              @RequestParam(defaultValue = "id") String sortBy,
                                                              @RequestParam(defaultValue = "0") Boolean searchFlag,
                                                              @RequestParam(required = false) String fullName,
-                                                             @RequestParam(required = false) DutyType dutyType) {
+                                                             @RequestParam(required = false) DutyType dutyType,
+                                                             @RequestParam(required = false) Department department) {
         if(searchFlag == Boolean.TRUE){
-            return BaseResponse.of(employeeFacade.searchEmployees(fullName, dutyType, pageNo, pageSize, sortBy));
+            return BaseResponse.of(employeeFacade.searchEmployees(fullName, dutyType, department, pageNo, pageSize, sortBy));
         }
         return BaseResponse.of(employeeFacade.getAllEmployees(pageNo, pageSize, sortBy));
     }
@@ -47,11 +49,11 @@ public class EmployeeController {
                                                              @RequestParam(defaultValue = "id") String sortBy,
                                                              @RequestParam(defaultValue = "0") Boolean searchFlag,
                                                              @RequestParam(required = false) String fullName,
-                                                             @RequestParam(required = false) DutyType dutyType
-                                                             ) {
+                                                             @RequestParam(required = false) DutyType dutyType,
+                                                             @RequestParam(required = false) Department department) {
 
         if(searchFlag == Boolean.TRUE){
-            return BaseResponse.of(employeeFacade.searchAllEmployeesManagedByEmployee(managerId, fullName, dutyType, pageNo, pageSize, sortBy));
+            return BaseResponse.of(employeeFacade.searchAllEmployeesManagedByEmployee(managerId, fullName, dutyType, department, pageNo, pageSize, sortBy));
         }
         return BaseResponse.of(employeeFacade.getAllEmployeesManagedByEmployee(managerId, pageNo, pageSize, sortBy));
     }

@@ -61,7 +61,8 @@ public class AccountFacadeImpl implements AccountFacade {
             request.getPhone(),
             request.getAddress(),
             request.getDegreeType(),
-            request.getDutyType()
+            request.getDutyType(),
+            request.getDepartment()
     );
     employeeRepository.save(employee);
   }

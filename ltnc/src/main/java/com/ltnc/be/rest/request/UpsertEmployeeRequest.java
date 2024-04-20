@@ -1,6 +1,7 @@
 package com.ltnc.be.rest.request;
 
 import com.ltnc.be.domain.employee.DegreeType;
+import com.ltnc.be.domain.employee.Department;
 import com.ltnc.be.domain.employee.DutyType;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
@@ -25,4 +26,5 @@ public class UpsertEmployeeRequest extends BaseRequest{
     private DegreeType degreeType;
     private String sex;
     private Date dob;
+    private Department department;
 }

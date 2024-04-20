@@ -32,6 +32,10 @@ public class Employee extends User {
     @Column(name = "duty_type")
     private DutyType dutyType;
 
+    @Enumerated(EnumType.STRING)
+    @Column(name = "department")
+    private Department department;
+
     @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
     private List<LeaveApplication> leaveApplicationList;
 
@@ -83,9 +87,10 @@ public class Employee extends User {
     @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY)
     private List<Task> tasks;
 
-    public Employee(UserRole role, String username, String email, String sex, String password, String fullName, Date dob, String phoneNumber, String address, DegreeType degreeType, DutyType dutyType) {
+    public Employee(UserRole role, String username, String email, String sex, String password, String fullName, Date dob, String phoneNumber, String address, DegreeType degreeType, DutyType dutyType, Department department) {
         super(role, username, email, sex, password, fullName, dob, phoneNumber, address);
         this.degreeType = degreeType;
         this.dutyType = dutyType;
+        this.department=department;
     }
 }

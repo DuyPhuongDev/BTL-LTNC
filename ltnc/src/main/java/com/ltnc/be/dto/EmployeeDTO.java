@@ -1,6 +1,7 @@
 package com.ltnc.be.dto;
 
 import com.ltnc.be.domain.employee.DegreeType;
+import com.ltnc.be.domain.employee.Department;
 import com.ltnc.be.domain.employee.DutyType;
 import com.ltnc.be.domain.employee.Employee;
 import com.ltnc.be.domain.task.Task;
@@ -24,6 +25,7 @@ public class EmployeeDTO {
     private DegreeType degreeType;
     private String sex;
     private String address;
+    private Department department;
     private String phoneNumber;
     private Date timeStart;
     private Date timeEnd;
@@ -41,6 +43,7 @@ public class EmployeeDTO {
                 .degreeType(employee.getDegreeType())
                 .address(employee.getAddress())
                 .sex(employee.getSex())
+                .department(employee.getDepartment())
                 .phoneNumber(employee.getPhoneNumber())
                 .timeStart(employee.getTimeStart())
                 .timeEnd(employee.getTimeEnd())

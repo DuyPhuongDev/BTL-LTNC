@@ -1,6 +1,7 @@
 package com.ltnc.be.rest.response;
 
 import com.ltnc.be.domain.employee.DegreeType;
+import com.ltnc.be.domain.employee.Department;
 import com.ltnc.be.domain.employee.DutyType;
 import com.ltnc.be.dto.*;
 import lombok.AllArgsConstructor;
@@ -23,6 +24,7 @@ public class EmployeeResponse {
     private String address;
     private String phoneNumber;
     private String sex;
+    private Department department;
     private Date timeStart;
     private Date timeEnd;
     private List<TaskDTO> tasks;
@@ -41,6 +43,7 @@ public class EmployeeResponse {
                 .phoneNumber(employeeDTO.getPhoneNumber())
                 .timeStart(employeeDTO.getTimeStart())
                 .sex(employeeDTO.getSex())
+                .department(employeeDTO.getDepartment())
                 .timeEnd(employeeDTO.getTimeEnd())
                 .tasks(employeeDTO.getTasks())
                 .equipments(employeeDTO.getEquipments())
