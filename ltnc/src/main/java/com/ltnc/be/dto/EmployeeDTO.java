@@ -1,5 +1,6 @@
 package com.ltnc.be.dto;
 
+import com.ltnc.be.domain.employee.DegreeType;
 import com.ltnc.be.domain.employee.DutyType;
 import com.ltnc.be.domain.employee.Employee;
 import lombok.AllArgsConstructor;
@@ -19,6 +20,8 @@ public class EmployeeDTO {
     private Long employeeId;
     private String employeeName;
     private DutyType dutyType;
+    private DegreeType degreeType;
+    private String sex;
     private String address;
     private String phoneNumber;
     private Date timeStart;
@@ -33,7 +36,9 @@ public class EmployeeDTO {
                 .employeeId(employee.getId())
                 .employeeName(employee.getFullName())
                 .dutyType(employee.getDutyType())
+                .degreeType(employee.getDegreeType())
                 .address(employee.getAddress())
+                .sex(employee.getSex())
                 .phoneNumber(employee.getPhoneNumber())
                 .timeStart(employee.getTimeStart())
                 .timeEnd(employee.getTimeEnd())

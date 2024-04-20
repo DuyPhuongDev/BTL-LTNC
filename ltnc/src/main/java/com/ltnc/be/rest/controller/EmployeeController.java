@@ -4,7 +4,9 @@ import com.ltnc.be.annotation.IsAuthenticated;
 import com.ltnc.be.annotation.IsAuthorizedAsAdmin;
 import com.ltnc.be.annotation.IsAuthorizedAsMember;
 import com.ltnc.be.domain.employee.DutyType;
+import com.ltnc.be.domain.employee.Employee;
 import com.ltnc.be.port.facade.EmployeeFacade;
+import com.ltnc.be.rest.request.UpsertEmployeeRequest;
 import com.ltnc.be.rest.response.BaseResponse;
 import com.ltnc.be.rest.response.EmployeeResponse;
 import io.swagger.v3.oas.annotations.Operation;
@@ -22,7 +24,7 @@ public class EmployeeController {
     @GetMapping("/")
     @Operation(tags = "Employee APIs")
     @ResponseStatus(HttpStatus.OK)
-    @IsAuthorizedAsAdmin
+    //@IsAuthorizedAsAdmin
     public BaseResponse<List<EmployeeResponse>> getAllEmployees(@RequestParam(defaultValue = "0") Integer pageNo,
                                                              @RequestParam(defaultValue = "10") Integer pageSize,
                                                              @RequestParam(defaultValue = "id") String sortBy,
@@ -52,5 +54,31 @@ public class EmployeeController {
             return BaseResponse.of(employeeFacade.searchAllEmployeesManagedByEmployee(managerId, fullName, dutyType, pageNo, pageSize, sortBy));
         }
         return BaseResponse.of(employeeFacade.getAllEmployeesManagedByEmployee(managerId, pageNo, pageSize, sortBy));
+    }
+
+    @DeleteMapping("/{employeeId}")
+    @Operation(tags = "Employee APIs")
+    @ResponseStatus(HttpStatus.OK)
+    //@IsAuthorizedAsAdmin
+    public BaseResponse<Void> deleteEmployeeById(@PathVariable Long employeeId){
+        employeeFacade.deleteEmployeeById(employeeId);
+        return BaseResponse.empty();
+    }
+
+    @PutMapping("/{employeeId}")
+    @Operation(tags = "Employee APIs")
+    @ResponseStatus(HttpStatus.OK)
+    //@IsAuthorizedAsAdmin
+    public BaseResponse<Void> UpdateEmployee(@PathVariable Long employeeId, @RequestBody UpsertEmployeeRequest request){
+        employeeFacade.UpdateEmployee(employeeId,request);
+        return BaseResponse.empty();
+    }
+
+    @GetMapping("/{employeeId}")
+    @Operation(tags = "Employee APIs")
+    @ResponseStatus(HttpStatus.OK)
+    //@IsAuthorizedAsAdmin
+    public BaseResponse<EmployeeResponse> searchEmployeeById(@PathVariable Long employeeId){
+        return BaseResponse.of(employeeFacade.getEmployeeById(employeeId));
     }
 }

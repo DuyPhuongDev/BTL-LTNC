@@ -1,5 +1,6 @@
 package com.ltnc.be.adapter.facade;
 
+import com.ltnc.be.domain.employee.Employee;
 import com.ltnc.be.domain.exception.EntityAlreadyExistedException;
 import com.ltnc.be.domain.exception.EntityNotFoundException;
 import com.ltnc.be.domain.exception.PasswordNotMatchException;
@@ -7,6 +8,7 @@ import com.ltnc.be.domain.user.User;
 import com.ltnc.be.domain.user.UserRole;
 import com.ltnc.be.port.facade.AccountFacade;
 import com.ltnc.be.port.repository.UserRepository;
+import com.ltnc.be.port.repository.EmployeeRepository;
 import com.ltnc.be.port.service.JwtService;
 import com.ltnc.be.rest.request.LoginRequest;
 import com.ltnc.be.rest.request.UpsertEmployeeRequest;
@@ -24,6 +26,7 @@ public class AccountFacadeImpl implements AccountFacade {
   private final UserRepository userRepository;
   private final JwtService jwtService;
   private final PasswordEncoder passwordEncoder;
+  private final EmployeeRepository employeeRepository;
 
   @SneakyThrows
   @Override
@@ -47,14 +50,19 @@ public class AccountFacadeImpl implements AccountFacade {
     if (existedUser.isPresent())
       throw new EntityAlreadyExistedException("Username is already existed in the system");
 
-    User newUser =
-        User.builder()
-            .username(request.getUsername())
-            .email(request.getEmail())
-            .fullName(request.getFullName())
-            .password(passwordEncoder.encode(request.getPassword()))
-            .role(UserRole.MEMBER)
-            .build();
-    userRepository.save(newUser);
+    Employee employee= new Employee(
+            UserRole.MEMBER,
+            request.getUsername(),
+            request.getEmail(),
+            request.getSex(),
+            passwordEncoder.encode(request.getPassword()),
+            request.getFullName(),
+            request.getDob(),
+            request.getPhone(),
+            request.getAddress(),
+            request.getDegreeType(),
+            request.getDutyType()
+    );
+    employeeRepository.save(employee);
   }
 }

@@ -1,5 +1,6 @@
 package com.ltnc.be.rest.response;
 
+import com.ltnc.be.domain.employee.DegreeType;
 import com.ltnc.be.domain.employee.DutyType;
 import com.ltnc.be.dto.EquipmentDTO;
 import com.ltnc.be.dto.MedicalRecordDTO;
@@ -21,8 +22,10 @@ public class EmployeeResponse {
     private Long employeeId;
     private String employeeName;
     private DutyType dutyType;
+    private DegreeType degreeType;
     private String address;
     private String phoneNumber;
+    private String sex;
     private Date timeStart;
     private Date timeEnd;
     private List<EquipmentDTO> equipments;
@@ -35,9 +38,11 @@ public class EmployeeResponse {
                 .employeeId(employeeDTO.getEmployeeId())
                 .employeeName(employeeDTO.getEmployeeName())
                 .dutyType(employeeDTO.getDutyType())
+                .degreeType(employeeDTO.getDegreeType())
                 .address(employeeDTO.getAddress())
                 .phoneNumber(employeeDTO.getPhoneNumber())
                 .timeStart(employeeDTO.getTimeStart())
+                .sex(employeeDTO.getSex())
                 .timeEnd(employeeDTO.getTimeEnd())
                 .equipments(employeeDTO.getEquipments())
                 .prescriptions(employeeDTO.getPrescriptions())

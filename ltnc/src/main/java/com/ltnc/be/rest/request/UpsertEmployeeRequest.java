@@ -1,11 +1,14 @@
 package com.ltnc.be.rest.request;
 
+import com.ltnc.be.domain.employee.DegreeType;
 import com.ltnc.be.domain.employee.DutyType;
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+
+import java.util.Date;
 
 @Getter
 @Setter
@@ -19,4 +22,7 @@ public class UpsertEmployeeRequest extends BaseRequest{
     private String address;
     private DutyType dutyType;
     private String fullName;
+    private DegreeType degreeType;
+    private String sex;
+    private Date dob;
 }
