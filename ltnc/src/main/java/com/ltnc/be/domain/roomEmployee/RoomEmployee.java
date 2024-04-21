@@ -6,11 +6,17 @@ import com.ltnc.be.domain.patient.Patient;
 import com.ltnc.be.domain.room.Room;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
+
+import java.util.Date;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
+@Setter
 @Table(name = "room_employee")
 public class RoomEmployee extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
@@ -21,9 +27,11 @@ public class RoomEmployee extends BaseEntity {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @Column(name = "start_date")
-    private Long startDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "start_time")
+    private Date startTime;
 
-    @Column(name = "end_date")
-    private Long endDate;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "end_time")
+    private Date endTime;
 }

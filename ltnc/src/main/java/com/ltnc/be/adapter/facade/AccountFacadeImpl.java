@@ -14,6 +14,7 @@ import com.ltnc.be.rest.request.LoginRequest;
 import com.ltnc.be.rest.request.UpsertEmployeeRequest;
 import com.ltnc.be.rest.request.UpsertUserRequest;
 import com.ltnc.be.rest.response.LoginResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.security.crypto.bcrypt.BCrypt;
@@ -45,6 +46,7 @@ public class AccountFacadeImpl implements AccountFacade {
 
   @Override
   @SneakyThrows
+  @Transactional
   public void createEmployee(UpsertEmployeeRequest request) {
     var existedUser = this.userRepository.findByUsername(request.getUsername());
     if (existedUser.isPresent())

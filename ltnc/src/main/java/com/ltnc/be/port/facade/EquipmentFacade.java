@@ -1,5 +1,6 @@
 package com.ltnc.be.port.facade;
 
+import com.ltnc.be.domain.equipment.Equipment;
 import com.ltnc.be.domain.equipment.Status;
 import com.ltnc.be.rest.request.UpsertEquipmentRequest;
 import com.ltnc.be.rest.response.EquipmentResponse;
@@ -14,4 +15,5 @@ public interface EquipmentFacade {
     void saveEquipment(UpsertEquipmentRequest request);
 
     void deleteEquipment(Long equipmentId);
+
 }

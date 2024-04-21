@@ -6,16 +6,14 @@ import com.ltnc.be.domain.patient.Patient;
 import com.ltnc.be.domain.patientRoom.PatientRoom;
 import com.ltnc.be.domain.roomEmployee.RoomEmployee;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "room")
