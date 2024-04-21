@@ -3,15 +3,15 @@ package com.ltnc.be.domain.leaveApplication;
 import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.employee.Employee;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 
 @Entity
 @Table(name = "leave_application")
+@Builder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 public class LeaveApplication extends BaseEntity {
@@ -22,12 +22,9 @@ public class LeaveApplication extends BaseEntity {
     @Temporal(TemporalType.DATE)
     private Date timeOff;
 
-    @Column(name = "time_send")
-    @Temporal(TemporalType.DATE)
-    private Date timeSend;
-
+    @Enumerated(EnumType.STRING)
     @Column(name = "status")
-    private String status;
+    private Status status;
 
     @ManyToOne(fetch = FetchType.EAGER)
     @JoinColumn(name = "employee_id")
