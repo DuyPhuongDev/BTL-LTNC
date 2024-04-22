@@ -16,8 +16,8 @@ public class RoomEmployeeDTO {
     private Long roomId;
     private Long employeeId;
     private String employeeName;
-    private Date startTime;
-    private Date endTime;
+    private Long startTime;
+    private Long endTime;
 
     public static RoomEmployeeDTO fromDomain(RoomEmployee roomEmployee){
         return RoomEmployeeDTO.builder()

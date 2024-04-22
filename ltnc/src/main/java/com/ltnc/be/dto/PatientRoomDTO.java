@@ -16,8 +16,8 @@ import java.util.List;
 @AllArgsConstructor
 public class PatientRoomDTO {
     private Long roomId;
-    private Date startTime;
-    private Date endTime;
+    private Long startTime;
+    private Long endTime;
     private int bedNumber;
     private List<Pair<Long, String>> patients;
 

@@ -46,15 +46,15 @@ public class RoomFacadeImpl implements RoomFacade {
     @Override
     @Transactional
     @SneakyThrows
-    public void assignPatientToRoom(Long roomId, Long patientId) {
+    public void assignPatientToRoom(Long roomId, Long patientId, int bedNumber){
         Room room = roomRepository.findById(roomId).orElseThrow(() -> new RuntimeException("Room not found"));
-        Patient patient = patientRepository.findById(patientId).orElseThrow(() -> new RuntimeException("Patient not found"));
+        Patient patient = patientRepository.findPatientById(patientId).orElseThrow(() -> new RuntimeException("Patient not found"));
 
         if (room.getPatientRooms().size() >= room.getRoomCapacity()) {
             throw new CapacityExceededException("Capacity exceeded for the room.");
         }
 
-        PatientRoom patientRoom = new PatientRoom(patient, room, System.currentTimeMillis(), null);
+        PatientRoom patientRoom = new PatientRoom(patient, room, bedNumber, System.currentTimeMillis(), null);
         room.getPatientRooms().add(patientRoom);
         roomRepository.save(room);
     }

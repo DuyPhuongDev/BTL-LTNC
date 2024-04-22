@@ -36,12 +36,12 @@ public class Patient extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private PatientType patientType;
 
-    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<MedicalTest> medicalTests;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<MedicalRecord> medicalRecords;
 
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<PatientRoom> patientRooms;
 }

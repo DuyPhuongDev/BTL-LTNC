@@ -21,10 +21,12 @@ public class Room extends BaseEntity {
     // capacity of the room
     @Column(name = "room_capacity")
     private int roomCapacity;
+    @Column(name = "room_number")
+    private String roomNumber;
 
-    @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "room", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<RoomEmployee> roomEmployees;
 
-    @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
+    @OneToMany(mappedBy = "room", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
     private List<PatientRoom> patientRooms;
 }

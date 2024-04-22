@@ -27,11 +27,9 @@ public class RoomEmployee extends BaseEntity {
     @JoinColumn(name = "employee_id")
     private Employee employee;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "start_time")
-    private Date startTime;
+    private Long startTime;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_time")
-    private Date endTime;
+    private Long endTime;
 }

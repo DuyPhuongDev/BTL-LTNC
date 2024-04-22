@@ -40,7 +40,7 @@ public class Employee extends User {
     @OneToMany(mappedBy = "employee", fetch = FetchType.EAGER)
     private List<LeaveApplication> leaveApplicationList;
 
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee", cascade = CascadeType.ALL)
     private List<RoomEmployee> roomEmployees;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
@@ -62,7 +62,7 @@ public class Employee extends User {
     )
     private List<MedicalRecord> medicalRecords;
 
-    @OneToMany(mappedBy = "prescriber", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "prescriber", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Prescription> prescriptions;
 
     // Manager relationship
@@ -71,11 +71,11 @@ public class Employee extends User {
     private Employee manager;
 
     // Employees under this manager
-    @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "manager", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Employee> employees;
 
     // task relationship
-    @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY)
+    @OneToMany(mappedBy = "employee",fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Task> tasks;
 
     public Employee(UserRole role, String username, String email, String sex, String password, String fullName, Date dob, String phoneNumber, String address, DegreeType degreeType, DutyType dutyType, Department department) {

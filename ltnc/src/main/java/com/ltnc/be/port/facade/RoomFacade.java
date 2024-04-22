@@ -9,7 +9,7 @@ import java.util.List;
 public interface RoomFacade {
     void createRoom(UpsertRoomRequest room);
     void deleteRoom(Long roomId);
-    void assignPatientToRoom(Long roomId, Long patientId);
+    void assignPatientToRoom(Long roomId, Long patientId, int bedNumber);
     void assignEmployeeToRoom(Long roomId, Long employeeId);
 
     @Transactional(readOnly = true)

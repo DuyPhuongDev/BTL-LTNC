@@ -14,6 +14,7 @@ import java.util.Date;
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @Table(name = "patient_room")
 public class PatientRoom extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
@@ -27,11 +28,9 @@ public class PatientRoom extends BaseEntity {
     @Column(name = "bed_number")
     private int bedNumber;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "start_time")
-    private Date startTime;
+    private Long startTime;
 
-    @Temporal(TemporalType.TIMESTAMP)
     @Column(name = "end_time")
-    private Date endTime;
+    private Long endTime;
 }

@@ -43,8 +43,10 @@ public class RoomController {
     @PostMapping("/{roomId}/patients/{patientId}")
     @Operation(tags = "Room APIs")
     @ResponseStatus(HttpStatus.OK)
-    public BaseResponse<Void> assignPatientToRoom(@PathVariable Long roomId, @PathVariable Long patientId) {
-        roomFacade.assignPatientToRoom(roomId, patientId);
+    public BaseResponse<Void> assignPatientToRoom(@PathVariable Long roomId,
+                                                  @PathVariable Long patientId,
+                                                  @RequestParam int bedNumber) {
+        roomFacade.assignPatientToRoom(roomId, patientId, bedNumber);
         return BaseResponse.empty();
     }
 
