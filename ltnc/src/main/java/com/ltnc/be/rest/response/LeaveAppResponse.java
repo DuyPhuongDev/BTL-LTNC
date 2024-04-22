@@ -14,6 +14,7 @@ import java.util.Date;
 @Builder
 @NoArgsConstructor
 public class LeaveAppResponse {
+    private Long id;
     private String reason;
     private Status status;
     private Date timeOff;
@@ -22,6 +23,7 @@ public class LeaveAppResponse {
 
     public static LeaveAppResponse toLeaveAppResponse(LeaveApplicationDTO leaveApplicationDTO){
         return LeaveAppResponse.builder()
+                .id(leaveApplicationDTO.getId())
                 .reason(leaveApplicationDTO.getReason())
                 .timeOff(leaveApplicationDTO.getTime_off())
                 .status(leaveApplicationDTO.getStatus())
