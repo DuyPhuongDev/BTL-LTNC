@@ -23,6 +23,10 @@ public class Patient extends BaseEntity {
     private String BHYT;
     @Column(name = "name", nullable = false)
     private String name;
+    @Column(name = "phone")
+    private String phone;
+    @Column(name = "sex")
+    private String sex;
     @Column(name = "address")
     private String address;
     @Column(name = "date_of_birth")

@@ -1,7 +1,10 @@
 package com.ltnc.be.dto;
 
+import com.ltnc.be.domain.employee.DegreeType;
+import com.ltnc.be.domain.employee.Department;
 import com.ltnc.be.domain.employee.DutyType;
 import com.ltnc.be.domain.employee.Employee;
+import com.ltnc.be.domain.task.Task;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -19,7 +22,10 @@ public class EmployeeDTO {
     private Long employeeId;
     private String employeeName;
     private DutyType dutyType;
+    private DegreeType degreeType;
+    private String sex;
     private String address;
+    private Department department;
     private String phoneNumber;
     private Date timeStart;
     private Date timeEnd;
@@ -27,16 +33,21 @@ public class EmployeeDTO {
     private List<PrescriptionDTO> prescriptions;
     private List<MedicalRecordDTO> medicalRecords;
     private List<MedicineManagementDTO> medicineManagements;
+    private List<TaskDTO> tasks;
 
     public static EmployeeDTO fromDomain(Employee employee) {
         return EmployeeDTO.builder()
                 .employeeId(employee.getId())
                 .employeeName(employee.getFullName())
                 .dutyType(employee.getDutyType())
+                .degreeType(employee.getDegreeType())
                 .address(employee.getAddress())
+                .sex(employee.getSex())
+                .department(employee.getDepartment())
                 .phoneNumber(employee.getPhoneNumber())
                 .timeStart(employee.getTimeStart())
                 .timeEnd(employee.getTimeEnd())
+                .tasks(employee.getTasks().stream().map(TaskDTO::fromDomain).collect(Collectors.toList()))
                 .equipments(employee.getEquipments().stream().map(EquipmentDTO::fromDomain).collect(Collectors.toList()))
                 .prescriptions(employee.getPrescriptions().stream().map(PrescriptionDTO::fromDomain).collect(Collectors.toList()))
                 .medicalRecords(employee.getMedicalRecords().stream().map(MedicalRecordDTO::fromDomain).collect(Collectors.toList()))
