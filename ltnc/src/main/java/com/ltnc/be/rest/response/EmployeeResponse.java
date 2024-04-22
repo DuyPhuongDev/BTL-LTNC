@@ -22,7 +22,7 @@ public class EmployeeResponse {
     private DegreeType degreeType;
     private String address;
     private String phoneNumber;
-    private String sex;
+    private String gender;
     private Department department;
     private List<TaskDTO> tasks;
     private List<EquipmentDTO> equipments;
@@ -39,7 +39,7 @@ public class EmployeeResponse {
                 .degreeType(employeeDTO.getDegreeType())
                 .address(employeeDTO.getAddress())
                 .phoneNumber(employeeDTO.getPhoneNumber())
-                .sex(employeeDTO.getGender())
+                .gender(employeeDTO.getGender())
                 .department(employeeDTO.getDepartment())
                 .roomEmployees(employeeDTO.getRoomEmployees())
                 .tasks(employeeDTO.getTasks())
