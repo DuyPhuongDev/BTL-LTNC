@@ -4,9 +4,7 @@ package com.ltnc.be.domain.patient;
 import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.medicalRecord.MedicalRecord;
 import com.ltnc.be.domain.medicalTest.MedicalTest;
-import com.ltnc.be.domain.patientEmployee.PatientEmployee;
 import com.ltnc.be.domain.patientRoom.PatientRoom;
-import com.ltnc.be.domain.room.Room;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -17,6 +15,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Getter
+@Builder
+@Setter
 @Table(name = "patient")
 public class Patient extends BaseEntity {
     @Column(name = "BHYT", unique = true, nullable = false)
@@ -25,8 +25,8 @@ public class Patient extends BaseEntity {
     private String name;
     @Column(name = "phone")
     private String phone;
-    @Column(name = "sex")
-    private String sex;
+    @Column(name = "gender")
+    private String gender;
     @Column(name = "address")
     private String address;
     @Column(name = "date_of_birth")
@@ -36,26 +36,11 @@ public class Patient extends BaseEntity {
     @Enumerated(EnumType.STRING)
     private PatientType patientType;
 
-    @ManyToOne(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
-    @JoinColumn(name = "room_id")
-    private Room patientRoom;
-
-    @Column(name = "time_start")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date timeStart;
-
-    @Column(name = "time_end")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date  timeEnd;
-
     @OneToMany(mappedBy = "patient", fetch = FetchType.EAGER)
     private List<MedicalTest> medicalTests;
 
-    @OneToOne(mappedBy = "patient", fetch = FetchType.EAGER)
-    private MedicalRecord medicalRecord;
-
-    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
-    private List<PatientEmployee> patientEmployees;
+    @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<MedicalRecord> medicalRecords;
 
     @OneToMany(mappedBy = "patient", fetch = FetchType.LAZY)
     private List<PatientRoom> patientRooms;

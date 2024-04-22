@@ -3,7 +3,7 @@ package com.ltnc.be.domain.user;
 import com.ltnc.be.domain.BaseEntity;
 import jakarta.persistence.*;
 import java.util.Date;
-import java.util.List;
+
 import lombok.*;
 
 @Table(name = "users")
@@ -25,8 +25,8 @@ public class User extends BaseEntity {
   @Column(name = "email")
   private String email;
 
-  @Column(name = "sex")
-  private String sex;
+  @Column(name = "gender")
+  private String gender;
 
   @Column(name = "password", nullable = false)
   private String password;

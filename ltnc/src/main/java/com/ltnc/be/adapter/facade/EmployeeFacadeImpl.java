@@ -4,12 +4,12 @@ import com.ltnc.be.domain.employee.Department;
 import com.ltnc.be.domain.employee.DutyType;
 import com.ltnc.be.domain.employee.Employee;
 import com.ltnc.be.domain.exception.EntityNotFoundException;
-import com.ltnc.be.domain.task.Task;
 import com.ltnc.be.dto.EmployeeDTO;
 import com.ltnc.be.port.facade.EmployeeFacade;
 import com.ltnc.be.port.repository.EmployeeRepository;
 import com.ltnc.be.rest.request.UpsertEmployeeRequest;
 import com.ltnc.be.rest.response.EmployeeResponse;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.data.domain.Page;
@@ -40,6 +40,7 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
             return new ArrayList<EmployeeResponse>();
         }
     }
+    @Override
     public List<EmployeeResponse> searchEmployees(String name, DutyType dutyType, Department department, Integer pageNo, Integer pageSize, String sortBy){
         Pageable paging = PageRequest.of(pageNo, pageSize, Sort.by(sortBy));
         var employees = employeeRepository.findEmployeesBySearchCriteria(name, dutyType,department, paging);
@@ -101,12 +102,24 @@ public class EmployeeFacadeImpl implements EmployeeFacade {
         Optional<Employee> optionalEmployee = employeeRepository.findEmployeeById(employeeId);
         if(optionalEmployee.isPresent()) {
             Employee employee = optionalEmployee.get();
-            employee.setFullName(request.getFullName());
-            employee.setAddress(request.getAddress());
-            employee.setPhoneNumber(request.getPhone());
-            employee.setDegreeType(request.getDegreeType());
-            employee.setDutyType(request.getDutyType());
-            employee.setDepartment(request.getDepartment());
+            if (request.getFullName() != null) {
+                employee.setFullName(request.getFullName());
+            }
+            if (request.getAddress() != null) {
+                employee.setAddress(request.getAddress());
+            }
+            if (request.getPhone() != null) {
+                employee.setPhoneNumber(request.getPhone());
+            }
+            if (request.getDegreeType() != null) {
+                employee.setDegreeType(request.getDegreeType());
+            }
+            if (request.getDutyType() != null) {
+                employee.setDutyType(request.getDutyType());
+            }
+            if (request.getDepartment() != null) {
+                employee.setDepartment(request.getDepartment());
+            }
             employeeRepository.save(employee);
         }else{
             throw new EntityNotFoundException();

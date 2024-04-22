@@ -67,7 +67,7 @@ public class EmployeeController {
         return BaseResponse.empty();
     }
 
-    @PutMapping("/{employeeId}")
+    @PatchMapping("/{employeeId}")
     @Operation(tags = "Employee APIs")
     @ResponseStatus(HttpStatus.OK)
     //@IsAuthorizedAsAdmin

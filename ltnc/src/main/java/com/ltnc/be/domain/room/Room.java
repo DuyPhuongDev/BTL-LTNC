@@ -11,18 +11,16 @@ import lombok.*;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "room")
-@Builder
-@Getter
 public class Room extends BaseEntity {
     // capacity of the room
     @Column(name = "room_capacity")
     private int roomCapacity;
-
-    @Column(name = "room_number")
-    private String roomNumber;
 
     @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
     private List<RoomEmployee> roomEmployees;

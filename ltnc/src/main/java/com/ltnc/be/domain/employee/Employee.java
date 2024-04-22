@@ -1,18 +1,19 @@
 package com.ltnc.be.domain.employee;
 
-import com.ltnc.be.domain.BaseEntity;
 import com.ltnc.be.domain.equipment.Equipment;
 import com.ltnc.be.domain.leaveApplication.LeaveApplication;
 import com.ltnc.be.domain.medicalRecord.MedicalRecord;
 import com.ltnc.be.domain.medicineManagement.MedicineManagement;
-import com.ltnc.be.domain.patientEmployee.PatientEmployee;
 import com.ltnc.be.domain.prescription.Prescription;
 import com.ltnc.be.domain.roomEmployee.RoomEmployee;
 import com.ltnc.be.domain.task.Task;
 import com.ltnc.be.domain.user.User;
 import com.ltnc.be.domain.user.UserRole;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.Date;
 import java.util.List;
@@ -40,17 +41,7 @@ public class Employee extends User {
     private List<LeaveApplication> leaveApplicationList;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    private List<RoomEmployee> roomEmployee;
-
-    @OneToMany(fetch = FetchType.LAZY, mappedBy = "employee")
-    private List<PatientEmployee> patientEmployees;
-
-    @Column(name = "time_start")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date timeStart;
-    @Column(name = "time_end")
-    @Temporal(TemporalType.TIMESTAMP)
-    private Date timeEnd;
+    private List<RoomEmployee> roomEmployees;
 
     @ManyToMany(cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
     @JoinTable(

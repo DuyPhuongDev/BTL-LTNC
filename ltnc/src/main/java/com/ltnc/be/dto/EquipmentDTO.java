@@ -1,5 +1,6 @@
 package com.ltnc.be.dto;
 
+import com.ltnc.be.domain.equipment.Status;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -18,7 +19,7 @@ public class EquipmentDTO {
     private Date inputDate;
     private String supplier;
     private String name;
-    private String status;
+    private Status status;
     private int quantities;
     private List<Long> employeeIds;  // Include only IDs for simplicity and performance
 

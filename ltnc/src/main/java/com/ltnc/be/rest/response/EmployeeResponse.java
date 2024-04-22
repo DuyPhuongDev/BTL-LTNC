@@ -9,7 +9,6 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
-import java.util.Date;
 import java.util.List;
 
 @Getter
@@ -23,15 +22,14 @@ public class EmployeeResponse {
     private DegreeType degreeType;
     private String address;
     private String phoneNumber;
-    private String sex;
+    private String gender;
     private Department department;
-    private Date timeStart;
-    private Date timeEnd;
     private List<TaskDTO> tasks;
     private List<EquipmentDTO> equipments;
     private List<PrescriptionDTO> prescriptions;
     private List<MedicalRecordDTO> medicalRecords;
     private List<MedicineManagementDTO> medicineManagements;
+    private List<RoomEmployeeDTO> roomEmployees;
 
     public static EmployeeResponse toEmployeeResponse(com.ltnc.be.dto.EmployeeDTO employeeDTO) {
         return EmployeeResponse.builder()
@@ -41,10 +39,9 @@ public class EmployeeResponse {
                 .degreeType(employeeDTO.getDegreeType())
                 .address(employeeDTO.getAddress())
                 .phoneNumber(employeeDTO.getPhoneNumber())
-                .timeStart(employeeDTO.getTimeStart())
-                .sex(employeeDTO.getSex())
+                .gender(employeeDTO.getGender())
                 .department(employeeDTO.getDepartment())
-                .timeEnd(employeeDTO.getTimeEnd())
+                .roomEmployees(employeeDTO.getRoomEmployees())
                 .tasks(employeeDTO.getTasks())
                 .equipments(employeeDTO.getEquipments())
                 .prescriptions(employeeDTO.getPrescriptions())

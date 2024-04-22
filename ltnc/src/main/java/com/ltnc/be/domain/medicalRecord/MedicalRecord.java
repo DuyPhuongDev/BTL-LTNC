@@ -6,18 +6,16 @@ import com.ltnc.be.domain.medicalTest.MedicalTest;
 import com.ltnc.be.domain.patient.Patient;
 import com.ltnc.be.domain.prescription.Prescription;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.Date;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
 @Table(name = "medical_record")
-@Data
+@Getter
+@Setter
+@Builder
 @NoArgsConstructor
 @AllArgsConstructor
 public class MedicalRecord extends BaseEntity {
@@ -30,7 +28,7 @@ public class MedicalRecord extends BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date leaveTime;
 
-    @OneToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
@@ -42,7 +40,7 @@ public class MedicalRecord extends BaseEntity {
     )
     private List<Employee> employees;
 
-    @OneToMany(mappedBy = "medicalRecord", cascade = {CascadeType.DETACH, CascadeType.MERGE, CascadeType.PERSIST, CascadeType.REFRESH})
+    @OneToMany(mappedBy = "medicalRecord")
     private List<MedicalTest> medicalTests;
 
     @OneToMany(mappedBy = "medicalRecord", fetch = FetchType.EAGER)

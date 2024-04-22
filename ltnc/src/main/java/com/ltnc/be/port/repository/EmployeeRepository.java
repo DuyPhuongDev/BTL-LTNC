@@ -32,5 +32,8 @@ public interface EmployeeRepository extends PagingAndSortingRepository<Employee,
 
     Page<Employee> findByManagerId(Long managerId, Pageable pageable);
    void deleteById(Long id);
-    void save(Employee employee);
+   void save(Employee employee);
+
+    Optional<List<Employee>> findAllByDutyType(DutyType dutyType);
+
 }
