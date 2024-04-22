@@ -6,23 +6,23 @@ import com.ltnc.be.domain.patient.Patient;
 import com.ltnc.be.domain.patientRoom.PatientRoom;
 import com.ltnc.be.domain.roomEmployee.RoomEmployee;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "room")
+@Builder
+@Getter
 public class Room extends BaseEntity {
     // capacity of the room
     @Column(name = "room_capacity")
     private int roomCapacity;
+
+    @Column(name = "room_number")
+    private String roomNumber;
 
     @OneToMany(mappedBy = "room", fetch = FetchType.EAGER)
     private List<RoomEmployee> roomEmployees;

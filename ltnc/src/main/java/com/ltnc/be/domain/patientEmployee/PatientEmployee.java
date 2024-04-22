@@ -6,11 +6,13 @@ import com.ltnc.be.domain.patient.Patient;
 import com.ltnc.be.domain.room.Room;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
 @NoArgsConstructor
 @AllArgsConstructor
+@Getter
 @Table(name = "patient_employee")
 public class PatientEmployee extends BaseEntity {
     @ManyToOne(fetch = FetchType.EAGER)
