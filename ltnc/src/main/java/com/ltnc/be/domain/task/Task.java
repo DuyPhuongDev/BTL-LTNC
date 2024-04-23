@@ -17,11 +17,11 @@ import java.util.Date;
 @AllArgsConstructor
 public class Task extends BaseEntity {
     @Column(name = "start_time")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date startTime;
 
     @Column(name = "end_time")
-    @Temporal(TemporalType.TIMESTAMP)
+    @Temporal(TemporalType.DATE)
     private Date endTime;
 
     @Column(name = "description")

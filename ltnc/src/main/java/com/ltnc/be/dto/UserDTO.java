@@ -17,6 +17,7 @@ public class UserDTO {
   private String userEmail;
   private Date userDob;
   private String userPhoneNumber;
+  private String name;
 
   public static UserDTO fromDomain(User user) {
     return UserDTO.builder()
@@ -25,6 +26,7 @@ public class UserDTO {
         .userEmail(user.getEmail())
         .userDob(user.getDob())
         .userPhoneNumber(user.getPhoneNumber())
+            .name(user.getFullName())
         .build();
   }
 }

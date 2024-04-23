@@ -1,6 +1,7 @@
 package com.ltnc.be.rest.response;
 
 import com.fasterxml.jackson.annotation.JsonInclude;
+import com.ltnc.be.domain.user.UserRole;
 import com.ltnc.be.dto.UserDTO;
 import java.util.Date;
 import lombok.*;
@@ -16,17 +17,13 @@ public class UserResponse {
   // We only return necessary information by use-case, don't expose too much
   private Long userId;
   private String userRole;
-  private String userEmail;
-  private Date userDob;
-  private String userPhoneNumber;
+  private String name;
 
   public static UserResponse toUserResponse(UserDTO user) {
     return UserResponse.builder()
         .userId(user.getUserId())
         .userRole(user.getUserRole())
-        .userEmail(user.getUserEmail())
-        .userDob(user.getUserDob())
-        .userPhoneNumber(user.getUserPhoneNumber())
+        .name(user.getName())
         .build();
   }
 }

@@ -41,7 +41,11 @@ public class AccountFacadeImpl implements AccountFacade {
 
     String accessToken = jwtService.generateToken(user.getId().toString());
 
-    return LoginResponse.builder().accessToken(accessToken).userId(user.getId()).build();
+    return LoginResponse.builder()
+            .accessToken(accessToken)
+            .userId(user.getId())
+            .name(user.getFullName())
+            .build();
   }
 
   @Override
