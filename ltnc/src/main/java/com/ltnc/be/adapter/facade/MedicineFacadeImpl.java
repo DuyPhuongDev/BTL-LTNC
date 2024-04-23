@@ -89,12 +89,19 @@ public class MedicineFacadeImpl implements MedicineFacade {
     }
 
     @Override
+    @SneakyThrows
     public void updateMedicine(Long medicineId, UpsertMedicineRequest medicineRequest) {
         Medicine existingMedicine = medicineRepository.findById(medicineId).orElse(null);
-        if (existingMedicine != null) {
-            existingMedicine.setName(medicineRequest.getName());
-            medicineRepository.save(existingMedicine);
+        if (existingMedicine == null) {
+            throw new EntityNotFoundException();
         }
+
+        if(medicineRequest.getName()!=null) existingMedicine.setName(medicineRequest.getName());
+        if(medicineRequest.getMedicineType()!=null) existingMedicine.setMedicineType(medicineRequest.getMedicineType());
+        if(medicineRequest.getMedicalUseType()!=null) existingMedicine.setMedicalUseType(medicineRequest.getMedicalUseType());
+        if(medicineRequest.getIngredient()!=null) existingMedicine.setIngredient(medicineRequest.getIngredient());
+        if(medicineRequest.getPrice()!=null) existingMedicine.setPrice(medicineRequest.getPrice());
+        medicineRepository.save(existingMedicine);
     }
 
     @Override
