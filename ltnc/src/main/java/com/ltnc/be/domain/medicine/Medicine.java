@@ -5,18 +5,16 @@ import com.ltnc.be.domain.employee.Employee;
 import com.ltnc.be.domain.prescription.Prescription;
 import com.ltnc.be.domain.prescriptionMedicine.PrescriptionMedicine;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Data;
-import lombok.EqualsAndHashCode;
-import lombok.NoArgsConstructor;
+import lombok.*;
 import org.springframework.jdbc.core.SqlReturnType;
 
 import java.util.Date;
 import java.util.List;
 
-@EqualsAndHashCode(callSuper = true)
 @Entity
-@Data
+@Builder
+@Getter
+@Setter
 @NoArgsConstructor
 @AllArgsConstructor
 @Table(name = "medicine")

@@ -1,15 +1,20 @@
 package com.ltnc.be.adapter.facade;
 
+import com.ltnc.be.domain.employee.DutyType;
+import com.ltnc.be.domain.employee.Employee;
+import com.ltnc.be.domain.exception.EntityNotFoundException;
 import com.ltnc.be.domain.medicine.Medicine;
 import com.ltnc.be.domain.medicineManagement.MedicineManagement;
 import com.ltnc.be.dto.MedicineManagementDTO;
 import com.ltnc.be.port.facade.MedicineFacade;
+import com.ltnc.be.port.repository.EmployeeRepository;
 import com.ltnc.be.port.repository.MedicineManagementRepository;
 import com.ltnc.be.port.repository.MedicineRepository;
 import com.ltnc.be.rest.request.UpsertMedicineManagementRequest;
 import com.ltnc.be.rest.request.UpsertMedicineRequest;
 import com.ltnc.be.rest.response.MedicineManagementResponse;
 import lombok.RequiredArgsConstructor;
+import lombok.SneakyThrows;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.domain.Sort;
@@ -17,6 +22,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
@@ -24,6 +30,7 @@ import java.util.stream.Collectors;
 public class MedicineFacadeImpl implements MedicineFacade {
     private final MedicineRepository medicineRepository;
     private final MedicineManagementRepository medicineManagementRepository;
+    private final EmployeeRepository employeeRepository;
 
     @Override
     public List<MedicineManagementResponse> getAllMedicineManagements(Integer pageNo, Integer pageSize, String sortBy) {
@@ -64,8 +71,20 @@ public class MedicineFacadeImpl implements MedicineFacade {
     }
 
     @Override
+    @SneakyThrows
     public void createMedicine(UpsertMedicineRequest medicineRequest) {
-        Medicine medicine = new Medicine();
+        Optional<List<Employee>> optionalEmployees = employeeRepository.findAllByDutyType(DutyType.MEDICINE_MANAGER);
+        List<Employee> employees = new ArrayList<>();
+        if (optionalEmployees.isPresent()){
+            employees = optionalEmployees.get();
+        }else throw new EntityNotFoundException();
+        Medicine medicine = Medicine.builder()
+                        .name(medicineRequest.getName())
+                                .medicineType(medicineRequest.getMedicineType())
+                                        .medicalUseType(medicineRequest.getMedicalUseType())
+                                                .ingredient(medicineRequest.getIngredient())
+                                                        .price(medicineRequest.getPrice())
+                                                                .build();
         medicineRepository.save(medicine);
     }
 
