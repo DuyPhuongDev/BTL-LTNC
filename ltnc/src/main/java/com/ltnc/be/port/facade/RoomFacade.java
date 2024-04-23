@@ -2,6 +2,7 @@ package com.ltnc.be.port.facade;
 
 import com.ltnc.be.domain.room.Room;
 import com.ltnc.be.rest.request.UpsertRoomRequest;
+import com.ltnc.be.rest.response.RoomResponse;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
@@ -12,8 +13,8 @@ public interface RoomFacade {
     void assignPatientToRoom(Long roomId, Long patientId, int bedNumber);
     void assignEmployeeToRoom(Long roomId, Long employeeId);
 
-    @Transactional(readOnly = true)
-    List<Room> getAllRooms();
+
+    List<RoomResponse> getAllRooms();
 
     @Transactional
     void deleteRoomPatient(Long roomId, Long patientId);

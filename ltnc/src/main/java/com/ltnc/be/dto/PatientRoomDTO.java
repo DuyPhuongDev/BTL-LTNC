@@ -19,7 +19,8 @@ public class PatientRoomDTO {
     private Long startTime;
     private Long endTime;
     private int bedNumber;
-    private List<Pair<Long, String>> patients;
+    private Long patientId;
+    private String patientName;
 
     public static PatientRoomDTO fromDomain(PatientRoom patientRoom){
         return PatientRoomDTO.builder()
@@ -27,6 +28,8 @@ public class PatientRoomDTO {
                 .bedNumber(patientRoom.getBedNumber())
                 .startTime(patientRoom.getStartTime())
                 .endTime(patientRoom.getEndTime())
+                .patientId(patientRoom.getPatient().getId())
+                .patientName(patientRoom.getPatient().getName())
                 .build();
     }
 }

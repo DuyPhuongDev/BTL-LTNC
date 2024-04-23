@@ -6,6 +6,7 @@ import com.ltnc.be.domain.roomEmployee.RoomEmployee;
 import com.ltnc.be.port.facade.RoomFacade;
 import com.ltnc.be.rest.request.UpsertRoomRequest;
 import com.ltnc.be.rest.response.BaseResponse;
+import com.ltnc.be.rest.response.RoomResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -58,12 +59,11 @@ public class RoomController {
         roomFacade.assignEmployeeToRoom(roomId, employeeId);
         return BaseResponse.empty();
     }
-    @GetMapping
+    @GetMapping("/")
     @Operation(tags = "Room APIs")
-    public ResponseEntity<List<Room>> getAllRooms() {
-
-        List<Room> rooms = roomFacade.getAllRooms();
-        return ResponseEntity.ok(rooms);
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse<List<RoomResponse>> getAllRooms() {
+        return BaseResponse.of(roomFacade.getAllRooms());
     }
 
     // Delete Room Patient
