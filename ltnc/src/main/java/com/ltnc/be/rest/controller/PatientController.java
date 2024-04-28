@@ -1,5 +1,6 @@
 package com.ltnc.be.rest.controller;
 
+import com.fasterxml.jackson.databind.ser.Serializers;
 import com.ltnc.be.domain.patient.PatientType;
 import com.ltnc.be.port.facade.PatientFacade;
 import com.ltnc.be.rest.request.UpsertMedicalRecordRequest;
@@ -50,6 +51,21 @@ public class PatientController {
     public BaseResponse<Void> deletePatient(@PathVariable Long patientId){
         patientFacade.deletePatientById(patientId);
         return BaseResponse.empty();
+    }
+
+    @PatchMapping("/{patientId}")
+    @Operation(tags = "Patient APIs")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse<Void> updatePatient(@PathVariable Long patientId, @RequestBody UpsertPatientRequest request){
+        patientFacade.updatePatient(patientId,request);
+        return BaseResponse.empty();
+    }
+
+    @GetMapping("/{patientId}")
+    @Operation(tags = "Patient APIs")
+    @ResponseStatus(HttpStatus.OK)
+    public BaseResponse<PatientResponse> getPatient(@PathVariable Long patientId){
+        return BaseResponse.of(patientFacade.getPatient(patientId));
     }
 
 }

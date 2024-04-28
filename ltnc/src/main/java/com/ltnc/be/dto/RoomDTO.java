@@ -16,6 +16,7 @@ import java.util.stream.Collectors;
 public class RoomDTO {
     private Long roomId;
     private int capacity;
+    private String roomNumber;
     private List<PatientRoomDTO> patientRooms;
     private List<RoomEmployeeDTO> roomEmployees;
 
@@ -23,6 +24,7 @@ public class RoomDTO {
         return RoomDTO.builder()
                 .roomId(room.getId())
                 .capacity(room.getRoomCapacity())
+                .roomNumber(room.getRoomNumber())
                 .patientRooms(room.getPatientRooms().stream().map(PatientRoomDTO::fromDomain).collect(Collectors.toList()))
                 .roomEmployees(room.getRoomEmployees().stream().map(RoomEmployeeDTO::fromDomain).collect(Collectors.toList()))
                 .build();

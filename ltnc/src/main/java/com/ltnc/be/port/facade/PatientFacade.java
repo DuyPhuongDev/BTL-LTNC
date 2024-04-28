@@ -17,6 +17,7 @@ public interface PatientFacade {
 
     void deletePatientById(Long patientId);
 
+    void updatePatient(Long patientId, UpsertPatientRequest request);
     PatientResponse getPatient(Long id);
 
 }

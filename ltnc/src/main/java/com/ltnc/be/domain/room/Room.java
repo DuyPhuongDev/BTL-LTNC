@@ -21,7 +21,7 @@ public class Room extends BaseEntity {
     // capacity of the room
     @Column(name = "room_capacity")
     private int roomCapacity;
-    @Column(name = "room_number")
+    @Column(name = "room_number", nullable = false, unique = true)
     private String roomNumber;
 
     @OneToMany(mappedBy = "room", fetch = FetchType.EAGER, cascade = CascadeType.ALL)

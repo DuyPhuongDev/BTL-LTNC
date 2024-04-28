@@ -84,6 +84,24 @@ public class PatientFacadeImpl implements PatientFacade {
 
     @Override
     @SneakyThrows
+    public void updatePatient(Long patientId, UpsertPatientRequest request) {
+        Optional<Patient> optionalPatient = patientRepository.findPatientById(patientId);
+        if (optionalPatient.isPresent()){
+            Patient patient = optionalPatient.get();
+
+            if (request.getName()!= null) patient.setName(request.getName());
+            if(request.getPhone()!=null) patient.setPhone(request.getPhone());
+            if(request.getDob()!=null) patient.setDob(request.getDob());
+            if(request.getGender()!=null) patient.setGender(request.getGender());
+            if(request.getAddress()!=null) patient.setAddress(request.getAddress());
+            if(request.getType()!=null) patient.setPatientType(request.getType());
+            if(request.getBHYT()!=null) patient.setBHYT(request.getBHYT());
+            patientRepository.save(patient);
+        }else throw new EntityNotFoundException();
+    }
+
+    @Override
+    @SneakyThrows
     public PatientResponse getPatient(Long id) {
         Optional<Patient> optionalPatient = patientRepository.findPatientById(id);
         if (optionalPatient.isPresent()){

@@ -5,11 +5,13 @@ import com.ltnc.be.domain.employee.Employee;
 import com.ltnc.be.domain.exception.EntityNotFoundException;
 import com.ltnc.be.domain.medicalRecord.MedicalRecord;
 import com.ltnc.be.domain.patient.Patient;
+import com.ltnc.be.dto.MedicalRecordDTO;
 import com.ltnc.be.port.facade.MedicalRecordFacade;
 import com.ltnc.be.port.repository.EmployeeRepository;
 import com.ltnc.be.port.repository.MedicalRecordRepository;
 import com.ltnc.be.port.repository.PatientRepository;
 import com.ltnc.be.rest.request.UpsertMedicalRecordRequest;
+import com.ltnc.be.rest.response.RecordResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.SneakyThrows;
 import org.springframework.stereotype.Service;
@@ -17,6 +19,7 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @RequiredArgsConstructor
 @Service
@@ -83,4 +86,13 @@ public class MedicalRecordFacadeImpl implements MedicalRecordFacade {
             medicalRecordRepository.deleteById(recordId);
         }else throw new EntityNotFoundException();
     }
+
+    @Override
+    public List<RecordResponse> getAllRecordByPatientId(Long patientId) {
+        List<MedicalRecord> medicalRecords = medicalRecordRepository.findAllByPatientId(patientId);
+        if (medicalRecords.isEmpty()) return new ArrayList<>();
+        return medicalRecords.stream().map(MedicalRecordDTO::fromDomain).map(RecordResponse::toResponse).collect(Collectors.toList());
+    }
+
+
 }
