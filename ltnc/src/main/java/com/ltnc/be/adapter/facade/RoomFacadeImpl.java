@@ -1,6 +1,7 @@
 package com.ltnc.be.adapter.facade;
 
 import com.ltnc.be.domain.employee.Employee;
+import com.ltnc.be.domain.exception.EntityNotFoundException;
 import com.ltnc.be.domain.patient.Patient;
 import com.ltnc.be.domain.patientRoom.PatientRoom;
 import com.ltnc.be.domain.room.Room;
@@ -9,6 +10,7 @@ import com.ltnc.be.dto.RoomDTO;
 import com.ltnc.be.port.facade.RoomFacade;
 import com.ltnc.be.port.repository.EmployeeRepository;
 import com.ltnc.be.port.repository.PatientRepository;
+import com.ltnc.be.port.repository.PatientRoomRepository;
 import com.ltnc.be.port.repository.RoomRepository;
 import com.ltnc.be.rest.exception.CapacityExceededException;
 import com.ltnc.be.rest.exception.EmployeeLimitExceededException;
@@ -30,6 +32,7 @@ public class RoomFacadeImpl implements RoomFacade {
     private final RoomRepository roomRepository;
     private final PatientRepository patientRepository;
     private final EmployeeRepository employeeRepository;
+    private final PatientRoomRepository patientRoomRepository;
 
     @Override
     @Transactional
@@ -90,9 +93,16 @@ public class RoomFacadeImpl implements RoomFacade {
 
     @Override
     @Transactional
+    @SneakyThrows
     public void deleteRoomPatient(Long roomId, Long patientId) {
-        Room room = roomRepository.findById(roomId).orElseThrow(() -> new RuntimeException("Room not found"));
+        // Find the room by roomId
+        Room room = roomRepository.findById(roomId)
+                .orElseThrow(() -> new RuntimeException("Room not found"));
+
+        // Remove the PatientRoom associated with the given patientId from the room's patientRooms
         room.getPatientRooms().removeIf(patientRoom -> patientRoom.getPatient().getId().equals(patientId));
+
+        // Save the room to trigger the cascade deletion if configured properly
         roomRepository.save(room);
     }
 

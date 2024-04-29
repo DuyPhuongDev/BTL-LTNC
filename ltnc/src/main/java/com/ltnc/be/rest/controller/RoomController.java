@@ -69,9 +69,9 @@ public class RoomController {
     // Delete Room Patient
     @DeleteMapping("/{roomId}/patients/{patientId}")
     @Operation(tags = "Room APIs")
-    public ResponseEntity<Void> deleteRoomPatient(@PathVariable Long roomId, @PathVariable Long patientId) {
+    public BaseResponse<Void> deleteRoomPatient(@PathVariable Long roomId, @PathVariable Long patientId) {
         roomFacade.deleteRoomPatient(roomId, patientId);
-        return ResponseEntity.noContent().build();
+        return BaseResponse.empty();
     }
 
     // Delete Room Employee
