@@ -62,6 +62,7 @@ public class MedicalRecordFacadeImpl implements MedicalRecordFacade {
             MedicalRecord medicalRecord = optionalMedicalRecord.get();
             if(request.getHospitalizedTime()!=null) medicalRecord.setHospitalizedTime(request.getHospitalizedTime());
             if(request.getLeaveTime()!=null) medicalRecord.setLeaveTime(request.getLeaveTime());
+            if(request.getDiagnostic()!=null) medicalRecord.setDiagnostic(request.getDiagnostic());
 
             if(request.getDoctorId()!=null){
                 // find doctor create this record and handle patient

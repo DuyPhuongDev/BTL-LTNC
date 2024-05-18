@@ -45,6 +45,7 @@ public class AccountFacadeImpl implements AccountFacade {
             .accessToken(accessToken)
             .userId(user.getId())
             .name(user.getFullName())
+            .role(user.getRole())
             .build();
   }
 

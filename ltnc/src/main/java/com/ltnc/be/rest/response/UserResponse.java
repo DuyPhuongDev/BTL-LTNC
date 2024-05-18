@@ -24,6 +24,7 @@ public class UserResponse {
         .userId(user.getUserId())
         .userRole(user.getUserRole())
         .name(user.getName())
+            .userRole(user.getUserRole())
         .build();
   }
 }

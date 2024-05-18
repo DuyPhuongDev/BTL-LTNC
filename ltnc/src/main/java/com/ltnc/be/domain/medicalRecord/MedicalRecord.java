@@ -28,7 +28,7 @@ public class MedicalRecord extends BaseEntity {
     @Temporal(TemporalType.TIMESTAMP)
     private Date leaveTime;
 
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne
     @JoinColumn(name = "patient_id")
     private Patient patient;
 
